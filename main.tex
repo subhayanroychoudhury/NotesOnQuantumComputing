@@ -236,12 +236,21 @@ Now we are ready to show that, if the basis-vector $\ket{j}$ is fed into the inp
 \hat{R}_k\ket{T}=e^{\frac{2\pi i T}{2^k}}\ket{T}
 \end{align*}
 
+In our circuit diagram, the two-qubit operation $\hat{\mathrm{CROT}}_k$ is shown by the construction of Fig.~\ref{Fig.CROT_k} where the black dot indicates the operation on the control qubit and the boxed $\hat{R}_k$ indicates the (conditional) rotation operation on the target qubit.
 
 \begin{figure}
     \centering
 \includegraphics[width=0.99\textwidth]{QFT_diagram.pdf}
     \caption{Circuit for performing quantum Fourier transform}
     \label{QFT_circuit}
+\end{figure}
+
+Now let us take a close look at Fig.~\ref{QFT_circuit}.
+
+\begin{figure}
+    \centering   \includegraphics[width=0.5\textwidth]{CROT_gate.png}
+    \caption{The $\hat{\mathrm{CROT}_k}$ gate}
+    \label{Fig.CROT_k}
 \end{figure}
 
 \begin{enumerate}
