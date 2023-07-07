@@ -232,7 +232,14 @@ where, in the third line, we have expressed the $k$-th computational basis vecto
     \sum_{k=0}^{N-1} \rightarrow \sum_{k_{n-1}=0}^1 \hdots \sum_{k_0=0}^1
 \end{align*}
 
-Now we are ready to show that, if the basis-vector $\ket{j}$ is fed into the input of the quantum circuit shown in \textcolor{red}{Fig. 1} in such a was that the bottommost (topmost) qubit corresponds to the least (most) significant bit, then the transformed state shown in the RHS of Eq.~\ref{QFT_main} is obtained as the output.
+Now we are ready to show that, if the basis-vector $\ket{j}$ is fed into the input of the quantum circuit shown in Fig.~\ref{QFT_circuit} in such a way that the bottommost (topmost) qubit corresponds to the least (most) significant bit, then the transformed state shown in the RHS of Eq.~\ref{QFT_main} is obtained as the output.
+
+\begin{figure}
+    \centering
+\includegraphics[width=0.99\textwidth]{QFT_diagram.pdf}
+    \caption{Circuit for performing quantum Fourier transform}
+    \label{QFT_circuit}
+\end{figure}
 
 \begin{enumerate}
     \item At the input point (point 1), we have the state $$\ket{j_{n-1} j_{n-2}\hdots j_1 j_0}.$$
