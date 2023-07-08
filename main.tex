@@ -198,11 +198,11 @@ From the discussion presented above, we can see that any computational basis-vec
 \begin{align}\label{M_qubit_basis}
     \ket{B} = \ket{q_{M-1}q_{M-2}\hdots q_1 q_0},
 \end{align}
-where, for any $i=0,\hdots,M-1$, the value of $q_i$ can be either 0 or 1. It is easy to notice the resemblance between Eq.~\ref{M_qubit_basis}, i.e., a basis-vector of the $M$-qubit Hilbert space and Eq.~\ref{SD_OccupationRepresentation}, a basis-vector for a many-electron system with $M$ spin-orbitals. Therefore, in order to represent an arbitrary many-electron state using qubits, we can adopt a convention whereby, the $i$-th qubit being in state $\ket{1}$ will indicate that the $(i+1)$-th spin-orbital is occupied while the state $\ket{0}$ for the qubit will indicate an unoccupied $(i+1)$-th spin-orbital.
+where, for any $i=0,\hdots,M-1$, the value of $q_i$ can be either 0 or 1. It is easy to notice the resemblance between Eq.~\ref{M_qubit_basis}, i.e., a basis-vector of the $M$-qubit Hilbert space and Eq.~\ref{SD_OccupationRepresentation}, a basis-vector for a many-electron system with $M$ spin-orbitals. Therefore, in order to represent an arbitrary many-electron state using qubits, we can adopt a convention whereby, the $i$-th qubit being in state $\ket{1}$ will indicate that the $(i+1)$-th spin-orbital is occupied while the state $\ket{0}$ for the qubit will indicate an unoccupied $(i+1)$-th spin-orbital. Then, any general many-electron state of any number of electrons ($<M$), expressible as a linear-combination of Slater determinants (Eq.~\ref{SD_OccupationRepresentation}) composed of $M$ spin-orbitals, can be represented by some general $M$-qubit state constructed as a linear-combination of the computational basis-vectors (Eq.~\ref{M_qubit_basis}).  
 
 \subsection*{Quantum Gates}
 
-After this brief discussion on the quantum states, let us look at operators. In the context of quantum-circuits, an $N$-qubit operator is essentially an $N$-qubit gate that changes an $N$-qubit quantum state from some initial state $\ket{I}$ to some final state $\ket{F}$.
+Let us now dig a little deeper into the details of quantum computation, starting with operators. In the context of quantum-circuits, an $N$-qubit operator is essentially an $N$-qubit gate that changes an $N$-qubit quantum state from some initial state $\ket{I}$ to some final state $\ket{F}$.
 
 Naturally, an operator in an $N$-dimensional space can be uniquely defined by specifying its actions on the basis functions (which are $N$ in number) of any basis set of that space. Working with the choice of basis set introduced earlier, the Hadamard gate $\hat{H}$ for the 1-qubit space can be defined as
 \begin{align*}\label{Hadamard}
