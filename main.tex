@@ -64,7 +64,7 @@
 
 \subsection*{Electronic Structure Theory and the Problem of Scaling}
 
-Any general single-particle state $\ket{\phi}$ can be expressed with respect to position vectors (eigenvectors of the position operator) as
+Any general single-particle state $\ket{\phi}$ can be expressed with respect to position vectors (eigenvectors of the position operator) $\ket{\mathbf{r}}$ as
 \begin{align*}
     \ket{\phi} &{}= \int d \mathbf{r} \ket{\mathbf{r}}\braket{\mathbf{r}|\phi}\\
     &{} = \int d\mathbf{r} \phi(\mathbf{r})\ket{\mathbf{r}}, \numberthis
@@ -117,13 +117,29 @@ Now, if there particles are consideration are electrons then a couple of additio
 
 \end{enumerate}
 
-Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons. These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied orbitals from a total $2M$ number of orbitals. Therefore, instead of $(2M)^N$, now the number of basis-vectors in our set should be \textit{$2M$ choose $N$}. 
+Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons. These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied orbitals from a total $2M$ number of orbitals. Therefore, instead of $(2M)^N$, now the number of basis-vectors in our set should be $_{2M}C_N$ (the binomial coefficient of $2M$ and $N$). 
 
-Let us take a concrete example. If there are 2 electrons in our system (like in a hydrogen molecule), then, the representation of an arbitrary electronic state on a $10 \times 10 \times 10$ real space grid will require \textit{(2000 choose 2)} i.e, 1999000 basis vectors. Consequently, we need to store 1999000 number of coefficients if we want to store this state (written as a linear combination of the basis vectors) on a computer. Assuming each coefficient requires a byte of storage, we will need slightly less than 2 MB. 
+If there are $M$ number of spin-orbitals, then any such basis vector (Slater determinant) can be written as
 
-If there are 42 electrons in our system (like in a benzene molecule), then the number of basis vectors is \textit{(2000 choose 42)}. This has the order of $10^{87}$. Therefore, the number of bytes required to store all the coefficients will exceed the estimated number of atoms in the universe!
+\begin{align}\label{SD_OccupationRepresentation}
+    \mathrm{SD}=\ket{j_{M-1}j_{M-2}\hdots j_1 j_0},
+\end{align}
+where for any $i=0,\hdots,M-1$, the value of $j_i$ can be either 0 or 1. In this convention, $j_i=0$ and $j_i=1$ will indicate, respectively, that the $(i+1)$-th spin-orbital is empty and occupied. Since each spin-orbital can only have two possible occupancies (0 or 1), the number of possible Slater determinants can not exceed $2^M$. However, if the total number of electrons is known to be $N$, then we know that every Slater determinant must have exactly $N$ number of occupied orbitals. Then, as mentioned earlier, the possible number of Slater determinants boils down to (\textit{$M$ choose $N$}), which, for any $N$, can never exceed $2^M$.
 
-For practical computation, this poses a serious problem in terms of scaling. On a conventional computer, the increment in memory is linear with the increment in the number of storage units. If you double the number of bits, you get twice as much memory. However, the scaling of \textit{$2M$ choose $N$} with respect to $N$ (for $N$ and $M$ of practical interest) is substantially higher. Thus, in practice, if we really want to store all the necessary coefficients on a memory-device, we need a device whose capacity (with respect to the number of storage units) scales \textit{at least} as quickly \textit{$2M$ choose $N$}.
+Let us take a concrete example. If there are 2 electrons in our system (like in a hydrogen molecule), then, the representation of an arbitrary electronic state on a $10 \times 10 \times 10$ real space grid will require $_{2000}C_2$ i.e, 1999000 basis vectors. Consequently, we need to store 1999000 number of coefficients if we want to store this state (written as a linear combination of the basis vectors) on a computer. Assuming each coefficient requires a byte of storage, we will need slightly less than 2 MB. 
+
+If there are 42 electrons in our system (like in a benzene molecule), then the number of basis vectors is $_{2000}C_{42}$. This has the order of $10^{87}$. Therefore, the number of bytes required to store all the coefficients will exceed the estimated number of atoms in the universe!
+
+For practical computation, this poses a serious problem in terms of scaling. On a conventional computer, the increment in memory is linear with the increment in the number of storage units. If you double the number of bits, you get twice as much memory. However, for $N$ and $M$ of practical interest, the scaling of \textit{$2M$ choose $N$} with respect to $N$ is substantially higher. Thus, in practice, if we really want to store all the necessary coefficients on a memory-device, we need a device whose capacity (with respect to the number of storage units) scales \textit{at least} as quickly \textit{$2M$ choose $N$}. This is exactly where a quantum computer can help.
+
+
+%Now, the state of a qubit, the unit of information of a quantum computer, resides in a 2-dimensional Hilbert space and thereby, requires two basis vectors for its description. Let us choose a set of orthonormal basis vectors in this Hilbert space and denote them by $\ket{0}$ and $\ket{1}$. Naturally, an arbitrary state of $n$ qubits is expressible as a linear-combination of $2^n$ basis vectors. Thus, the dimension of the relevant Hilbert space, and consequently the storage capacity increases exponentially with the number of qubits.
+
+
+How, then, can we represent a general many-electron state, written as a linear combination of $_MC_N$ Slater determinants like the one shown in Eq.~\ref{SD_OccupationRepresentation}, with the help of a quantum computer? %Note that every basis 
+
+
+%We can now easily represent the aforementioned Slater determinant with qubits. In a quantum-representation using qubits, we can adapt a convention whereby, the $i$-th qubit being in state $\ket{1}$ will indicate that the $(i+1)$-th spin-orbital is occupied while the state $\ket{0}$ for the qubit will indicate an unoccupied $(i+1)$-th spin-orbital. 
 
 
     
@@ -131,7 +147,7 @@ For practical computation, this poses a serious problem in terms of scaling. On 
     
     %A two-electron state $\ket{\Phi} = C_1 \ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta} + C_2 \ket{\mathbf{r}_j^\beta\mathbf{r}_i^\alpha} + \hdots$ can be written simply as $\ket{\Phi} = (C_1-C_2) \ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta}+\hdots$
 
-\subsection*{Quantum Computation}
+\subsection*{The Qubit}
 
 For a quantum computer, the unit of information is a qubit. The state of a single qubit resides in a 2-dimensional vector space. Thus, any state of a single qubit can be written as a linear combination of basis vectors from this 2-dimensional vector space. Naturally, any basis-set of this space contains two basis vectors. Let us choose a set where the two orthogonal basis vectors are denoted by $\ket{0}$ and $\ket{1}$. Thus, any general vector 
 \begin{align}\label{Eq1}
@@ -175,7 +191,16 @@ This notion can be generalized to more than 2 qubits in a straightforward manner
 \end{align*}
 Each basis vector contains $n$ terms, each of which can be either 0 or 1. The basis vectors are ordered in such a way that, for each vector, the rightmost term changes between every consecutive vector. The next (to the left) term remains unchanged for two consecutive vectors and then changes. Continuing in this fashion, it is easy to see that the leftmost term remains unchanged at 0 for the first $2^{n-1}$ basis vectors and then stays fixed at 1 for the rest of the vectors. Such a basis set will be referred to as a computational basis set for $n$ qubits.
 
+\subsection*{Many-electron States : a Qubit-based Representation}
 
+From the discussion presented above, we can see that any computational basis-vector of $M$ qubits can be written as
+
+\begin{align}\label{M_qubit_basis}
+    \ket{B} = \ket{q_{M-1}q_{M-2}\hdots q_1 q_0},
+\end{align}
+where, for any $i=0,\hdots,M-1$, the value of $q_i$ can be either 0 or 1. It is easy to notice the resemblance between Eq.~\ref{M_qubit_basis}, i.e., a basis-vector of the $M$-qubit Hilbert space and Eq.~\ref{SD_OccupationRepresentation}, a basis-vector for a many-electron system with $M$ spin-orbitals. Therefore, in order to represent an arbitrary many-electron state using qubits, we can adopt a convention whereby, the $i$-th qubit being in state $\ket{1}$ will indicate that the $(i+1)$-th spin-orbital is occupied while the state $\ket{0}$ for the qubit will indicate an unoccupied $(i+1)$-th spin-orbital.
+
+\subsection*{Quantum Gates}
 
 After this brief discussion on the quantum states, let us look at operators. In the context of quantum-circuits, an $N$-qubit operator is essentially an $N$-qubit gate that changes an $N$-qubit quantum state from some initial state $\ket{I}$ to some final state $\ket{F}$.
 
