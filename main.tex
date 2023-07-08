@@ -84,24 +84,22 @@ where $M$ denotes the total number of grid points, $\ket{\mathbf{r}_i}$ is the p
     \phi_i=\braket{\mathbf{r}_i|\phi}.
 \end{align}
 
-Eq.~\ref{OneP_Expansion} shows that, in this representation, our basis set $\{\ket{\mathbf{r}_1}, \ket{\mathbf{r}_2},\hdots, \ket{\mathbf{r}_M}\}$ has $M$ number of basis vectors.
-
-What happens if, instead of a single particle, we need to describe a two-particle state within the same grid. Now our basis set becomes something like
+Eq.~\ref{OneP_Expansion} shows that, in this representation, our basis set $\{\ket{\mathbf{r}_1}, \ket{\mathbf{r}_2},\hdots, \ket{\mathbf{r}_M}\}$ has $M$ number of basis vectors. What happens if, instead of a single particle, we need to describe a two-particle state within the same grid? Now our basis set becomes something like
 \begin{align*}
     \{\ket{\mathbf{r}_1\mathbf{r}_1}, \ket{\mathbf{r}_1\mathbf{r}_2} , \hdots , \ket{\mathbf{r}_1\mathbf{r}_M}, \ket{\mathbf{r}_2\mathbf{r}_1} , \ket{\mathbf{r}_2\mathbf{r}_2}, \hdots , \ket{\mathbf{r}_2\mathbf{r}_M}, \hdots , \ket{\mathbf{r}_M\mathbf{r}_1}, \ket{\mathbf{r}_M\mathbf{r}_2}, \hdots , \ket{\mathbf{r}_M\mathbf{r}_M}\},
 \end{align*}
 where 
 \begin{align*}
-\ket{\mathbf{r}_i \mathbf{r}_j} = \ket{\mathbf{r}_i}\otimes\ket{\mathbf{r}_j}
+\ket{\mathbf{r}_i \mathbf{r}_j} = \ket{\mathbf{r}_i}\otimes\ket{\mathbf{r}_j}.
 \end{align*}
 
-Thus, we now have $M^2$ basis vectors in out set. Generalizing to an $N$-particle system, we will need $M^N$ number of basis functions. This is an example of exponential scaling with respect to the number of particles.
+Thus, we now have $M^2$ basis vectors in our set. Generalizing to an $N$-particle system, we will need $M^N$ number of basis functions. This is an example of exponential scaling with respect to the number of particles.
 
-Now, if there particles are consideration are electrons then a couple of additional points need to be taken into account.
+Now, if the particles are consideration are electrons then a couple of additional points need to be taken into account.
 \begin{enumerate}
-    \item Electrons have an additional \textit{spin} degree of freedom, which, for a single particle requires two basis vectors (we will use $\uparrow$ and $\downarrow$ to denote them). So, the single-electron basis set should be modified to 
+    \item Electrons have an additional \textit{spin} degree of freedom, which, for a single particle, requires two basis vectors (we will use $\ket{\uparrow}$ and $\ket{\downarrow}$ to denote them). So, the single-electron basis set should be modified to 
     \begin{align*}
-        \{\ket{\mathbf{r}_1^\uparrow}, \ket{\mathbf{r}_1^\downarrow}, \ket{\mathbf{r}_2^\uparrow}, \ket{\mathbf{r}_2^\downarrow},\hdots, \ket{\mathbf{r}_M^\uparrow}, \ket{\mathbf{r}_M^\downarrow}\}
+        \{\ket{\mathbf{r}_1}\otimes\ket{\uparrow}, \ket{\mathbf{r}_1}\otimes\ket{\downarrow}, \ket{\mathbf{r}_2}\otimes\ket{\uparrow}, \ket{\mathbf{r}_2}\otimes\ket{\downarrow},\hdots, \ket{\mathbf{r}_M}\otimes\ket{\uparrow}, \ket{\mathbf{r}_M}\otimes\ket{\downarrow}\}
     \end{align*}
     This has $2M$ basis vectors.  We shall call them spin-orbitals in the position basis. Thus, for $N$-particles, we will need $(2M)^N$ basis vectors.
     \item Electrons are indistinguishable particles with wavefunctions that are antisymmetric with respect to an exchange of any two electrons. This implies, for example, that
