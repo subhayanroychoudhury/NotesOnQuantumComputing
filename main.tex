@@ -62,6 +62,68 @@
 
 \maketitle
 
+\subsection*{Electronic Structure Theory and the Problem of Scaling}
+
+Any general single-particle state $\ket{\phi}$ can be expressed with respect to position vectors (eigenvectors of the position operator) as
+\begin{align*}
+    \ket{\phi} &{}= \int d \mathbf{r} \ket{\mathbf{r}}\braket{\mathbf{r}|\phi}\\
+    &{} = \int d\mathbf{r} \phi(\mathbf{r})\ket{\mathbf{r}}, \numberthis
+\end{align*}
+where we have defined
+\begin{align}
+    \phi(\mathbf{r})= \braket{\mathbf{r}|\phi}.
+\end{align}
+
+For the sake of computational feasibility, we need to work with a discrete set of points within a real space grid. Then, we need to replace the integral with a sum as
+
+\begin{align}\label{OneP_Expansion}
+    \ket{\phi} = \sum_{i=1}^M \phi_i \ket{\mathbf{r}_i},
+\end{align}
+where $M$ denotes the total number of grid points, $\ket{\mathbf{r}_i}$ is the position-vector associated with the $i$-th grid point, and 
+\begin{align}
+    \phi_i=\braket{\mathbf{r}_i|\phi}.
+\end{align}
+
+Eq.~\ref{OneP_Expansion} shows that, in this representation, our basis set $\{\ket{\mathbf{r}_1}, \ket{\mathbf{r}_2},\hdots, \ket{\mathbf{r}_M}\}$ has $M$ number of basis vectors.
+
+What happens if, instead of a single particle, we need to describe a two-particle state within the same grid. Now our basis set becomes something like
+\begin{align*}
+    \{\ket{\mathbf{r}_1\mathbf{r}_1}, \ket{\mathbf{r}_1\mathbf{r}_2} , \hdots , \ket{\mathbf{r}_1\mathbf{r}_M}, \ket{\mathbf{r}_2\mathbf{r}_1} , \ket{\mathbf{r}_2\mathbf{r}_2}, \hdots , \ket{\mathbf{r}_2\mathbf{r}_M}, \hdots , \ket{\mathbf{r}_M\mathbf{r}_1}, \ket{\mathbf{r}_M\mathbf{r}_2}, \hdots , \ket{\mathbf{r}_M\mathbf{r}_M}\},
+\end{align*}
+where 
+\begin{align*}
+\ket{\mathbf{r}_i \mathbf{r}_j} = \ket{\mathbf{r}_i}\otimes\ket{\mathbf{r}_j}
+\end{align*}
+
+Thus, we now have $M^2$ basis vectors in out set. Generalizing to an $N$-particle system, we will need $M^N$ number of basis functions. This is an example of exponential scaling with respect to the number of particles.
+
+Now, if there particles are consideration are electrons then a couple of additional points need to be taken into account.
+\begin{enumerate}
+    \item Electrons have an additional \textit{spin} degree of freedom, which, for a single particle requires two basis vectors (we will use $\uparrow$ and $\downarrow$ to denote them). So, the single-electron basis set should be modified to 
+    \begin{align*}
+        \{\ket{\mathbf{r}_1^\uparrow}, \ket{\mathbf{r}_1^\downarrow}, \ket{\mathbf{r}_2^\uparrow}, \ket{\mathbf{r}_2^\downarrow},\hdots, \ket{\mathbf{r}_M^\uparrow}, \ket{\mathbf{r}_M^\downarrow}\}
+    \end{align*}
+    This has $2M$ basis vectors.  We shall call them spin-orbitals in the position basis. Thus, for $N$-particles, we will need $(2M)^N$ basis vectors.
+    \item Electrons are indistinguishable particles with wavefunctions that are antisymmetric with respect to an exchange of any two electrons. This implies, for example, that
+    \begin{align}
+        \ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta} = -\ket{\mathbf{r}_j^\beta\mathbf{r}_i^\alpha},
+    \end{align}
+    and therefore, we do not need to consider them separately when we construct our basis set. We can, in fact, combine them into the so-called Slater determinants.
+
+    This also implies that
+\begin{align}
+\ket{\mathbf{r}_i^\alpha\mathbf{r}_i^\alpha}=-\ket{\mathbf{r}_i^\alpha\mathbf{r}_i^\alpha}=\ket{0}.
+\end{align}
+
+Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons. These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied orbitals from a total $2M$ number of orbitals. Therefore, now the number of basis-vectors in our set should be \textit{$2M$ choose $N$}.
+    
+    %It suffices to combine them into a single basis-vector $\ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta} - \ket{\mathbf{r}_j^\beta\mathbf{r}_i^\alpha}$.
+    
+    %A two-electron state $\ket{\Phi} = C_1 \ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta} + C_2 \ket{\mathbf{r}_j^\beta\mathbf{r}_i^\alpha} + \hdots$ can be written simply as $\ket{\Phi} = (C_1-C_2) \ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta}+\hdots$
+\end{enumerate}
+
+\subsection*{Quantum Computation}
+
 For a quantum computer, the unit of information is a qubit. The state of a single qubit resides in a 2-dimensional vector space. Thus, any state of a single qubit can be written as a linear combination of basis vectors from this 2-dimensional vector space. Naturally, any basis-set of this space contains two basis vectors. Let us choose a set where the two orthogonal basis vectors are denoted by $\ket{0}$ and $\ket{1}$. Thus, any general vector 
 \begin{align}\label{Eq1}
     \ket{a}=a_0\ket{0}+a_1\ket{1}
