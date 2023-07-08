@@ -115,12 +115,21 @@ Now, if there particles are consideration are electrons then a couple of additio
 \ket{\mathbf{r}_i^\alpha\mathbf{r}_i^\alpha}=-\ket{\mathbf{r}_i^\alpha\mathbf{r}_i^\alpha}=\ket{0}.
 \end{align}
 
-Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons. These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied orbitals from a total $2M$ number of orbitals. Therefore, now the number of basis-vectors in our set should be \textit{$2M$ choose $N$}.
+\end{enumerate}
+
+Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons. These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied orbitals from a total $2M$ number of orbitals. Therefore, instead of $(2M)^N$, now the number of basis-vectors in our set should be \textit{$2M$ choose $N$}. 
+
+Let us take a concrete example. If there are 2 electrons in our system (like in a hydrogen molecule), then, the representation of an arbitrary electronic state on a $10 \times 10 \times 10$ real space grid will require \textit{(2000 choose 2)} i.e, 1999000 basis vectors. Consequently, we need to store 1999000 number of coefficients if we want to store this state (written as a linear combination of the basis vectors) on a computer. Assuming each coefficient requires a byte of storage, we will need slightly less than 2 MB. 
+
+If there are 42 electrons in our system (like in a benzene molecule), then the number of basis vectors is \textit{(2000 choose 42)}. This has the order of $10^{87}$. Therefore, the number of bytes required to store all the coefficients will exceed the estimated number of atoms in the universe!
+
+For practical computation, this poses a serious problem in terms of scaling. On a conventional computer, the increment in memory is linear with the increment in the number of storage units. If you double the number of bits, you get twice as much memory. However, the scaling of \textit{$2M$ choose $N$} with respect to $N$ (for $N$ and $M$ of practical interest) is substantially higher. Thus, in practice, if we really want to store all the necessary coefficients on a memory-device, we need a device whose capacity (with respect to the number of storage units) scales \textit{at least} as quickly \textit{$2M$ choose $N$}.
+
+
     
     %It suffices to combine them into a single basis-vector $\ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta} - \ket{\mathbf{r}_j^\beta\mathbf{r}_i^\alpha}$.
     
     %A two-electron state $\ket{\Phi} = C_1 \ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta} + C_2 \ket{\mathbf{r}_j^\beta\mathbf{r}_i^\alpha} + \hdots$ can be written simply as $\ket{\Phi} = (C_1-C_2) \ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta}+\hdots$
-\end{enumerate}
 
 \subsection*{Quantum Computation}
 
