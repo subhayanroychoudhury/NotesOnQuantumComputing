@@ -115,10 +115,9 @@ Now, if the particles are consideration are electrons then a couple of additiona
 
 \end{enumerate}
 
-Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons. These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied orbitals from a total $2M$ number of orbitals. Therefore, instead of $(2M)^N$, now the number of basis-vectors in our set should be $_{2M}C_N$ (the binomial coefficient of $2M$ and $N$). 
+Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons. These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied orbitals from a total number of $2M$. Therefore, instead of $(2M)^N$, now the number of basis-vectors in our set should be $_{2M}C_N$ (the binomial coefficient \textit{$2M$ choose $N$}). Let us find out what these basis vectors should look like.
 
 If there are $M$ number of spin-orbitals, then any such basis vector (Slater determinant) can be written as
-
 \begin{align}\label{SD_OccupationRepresentation}
     \mathrm{SD}=\ket{j_{M-1}j_{M-2}\hdots j_1 j_0},
 \end{align}
@@ -128,7 +127,7 @@ Let us take a concrete example. If there are 2 electrons in our system (like in 
 
 If there are 42 electrons in our system (like in a benzene molecule), then the number of basis vectors is $_{2000}C_{42}$. This has the order of $10^{87}$. Therefore, the number of bytes required to store all the coefficients will exceed the estimated number of atoms in the universe!
 
-For practical computation, this poses a serious problem in terms of scaling. On a conventional computer, the increment in memory is linear with the increment in the number of storage units. If you double the number of bits, you get twice as much memory. However, for $N$ and $M$ of practical interest, the scaling of \textit{$2M$ choose $N$} with respect to $N$ is substantially higher. Thus, in practice, if we really want to store all the necessary coefficients on a memory-device, we need a device whose capacity (with respect to the number of storage units) scales \textit{at least} as quickly \textit{$2M$ choose $N$}. This is exactly where a quantum computer can help.
+For practical computation, this poses a serious problem in terms of scaling. On a conventional computer, the increment in memory is linear with the increment in the number of storage units. If you double the number of bits, you get twice as much memory. However, for $N$ and $M$ of practical interest, the scaling of $_{M}C_N$  with respect to $N$ is substantially higher. Thus, in practice, if we really want to store all the necessary coefficients on a memory-device, we need a device whose capacity (with respect to the number of storage units) scales \textit{at least} as quickly as $_{M}C_N$. This is exactly where a quantum computer can help.
 
 
 %Now, the state of a qubit, the unit of information of a quantum computer, resides in a 2-dimensional Hilbert space and thereby, requires two basis vectors for its description. Let us choose a set of orthonormal basis vectors in this Hilbert space and denote them by $\ket{0}$ and $\ket{1}$. Naturally, an arbitrary state of $n$ qubits is expressible as a linear-combination of $2^n$ basis vectors. Thus, the dimension of the relevant Hilbert space, and consequently the storage capacity increases exponentially with the number of qubits.
@@ -147,7 +146,7 @@ How, then, can we represent a general many-electron state, written as a linear c
 
 \subsection*{The Qubit}
 
-For a quantum computer, the unit of information is a qubit. The state of a single qubit resides in a 2-dimensional vector space. Thus, any state of a single qubit can be written as a linear combination of basis vectors from this 2-dimensional vector space. Naturally, any basis-set of this space contains two basis vectors. Let us choose a set where the two orthogonal basis vectors are denoted by $\ket{0}$ and $\ket{1}$. Thus, any general vector 
+For a quantum computer, the unit of information is a qubit. The state of a single qubit resides in a 2-dimensional vector space. Naturally, any basis-set of this space contains two basis vectors. Let us choose a set where the two orthogonal basis vectors are denoted by $\ket{0}$ and $\ket{1}$. Thus, any general vector 
 \begin{align}\label{Eq1}
     \ket{a}=a_0\ket{0}+a_1\ket{1}
 \end{align}
@@ -175,7 +174,8 @@ $\ket{ab}$ resides in a 4-dimensional space which is the tensor-product space of
     a_0b_1\\
     a_1b_0\\
     a_1b_1
-\end{pmatrix}$
+\end{pmatrix}.$
+
 For example, the two-qubit state $\ket{01}$ can be written as $\begin{pmatrix}
     0\\
     1\\
@@ -185,7 +185,7 @@ For example, the two-qubit state $\ket{01}$ can be written as $\begin{pmatrix}
 
 This notion can be generalized to more than 2 qubits in a straightforward manner. Continuing the convention introduced in Eq.~\ref{Eq1} and~\ref{Eq2}, for the $2^n$ dimensional vector space of $n$ qubits, we will choose the basis set
 \begin{align*}
-\{\ket{0,0,\hdots,0,0} , \ket{0,0,\hdots,0,1} , \ket{0,0,\hdots,1,0}, \hdots ,\ket{1,1,\hdots,1,1} \}.
+\{\ket{0,0,\hdots,0,0} , \ket{0,0,\hdots,0,1} , \ket{0,0,\hdots,1,0}, \ket{0,0,\hdots,1,1},\hdots ,\ket{1,1,\hdots,1,1} \}.
 \end{align*}
 Each basis vector contains $n$ terms, each of which can be either 0 or 1. The basis vectors are ordered in such a way that, for each vector, the rightmost term changes between every consecutive vector. The next (to the left) term remains unchanged for two consecutive vectors and then changes. Continuing in this fashion, it is easy to see that the leftmost term remains unchanged at 0 for the first $2^{n-1}$ basis vectors and then stays fixed at 1 for the rest of the vectors. Such a basis set will be referred to as a computational basis set for $n$ qubits.
 
