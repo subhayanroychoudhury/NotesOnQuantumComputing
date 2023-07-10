@@ -336,7 +336,7 @@ In our circuit diagram, the two-qubit operation $\hat{\mathrm{CROT}}_k$ is shown
 
 \begin{figure}
     \centering
-\includegraphics[width=0.99\textwidth]{QFT_diagram.pdf}
+\includegraphics[width=0.99\textwidth]{QFT_schematic.png}
     \caption{Circuit for performing quantum Fourier transform}
     \label{QFT_circuit}
 \end{figure}
@@ -439,4 +439,45 @@ $\phi$ being the eigenvalue. Naturally, we can construct an operator $\hat{U}=e^
     \hat{U}\ket{\Psi}=e^{2\pi i \phi}\ket{\Psi}.
 \end{align}
 From our earlier example of phase-kickback (see Eq.~\ref{kickback1} and~\ref{kickback2}), it is easy to see that if $\hat{U}$ is operated as a controlled gate on the target state $\ket{\Psi}$, with the control qubit being in state $\frac{1}{\sqrt{2}}(\ket{0}+\ket{1})$, then the control qubit will be rotated by an angle dependent on the eigenvalue of $\ket{\Psi}$. This is the property we will exploit for our goal.
+
+In particular, the operation of Controlled-$\hat{U}^{2^t}$ on $\frac{1}{\sqrt{2}}(\ket{0}+\ket{1}) \otimes \ket{\Psi}$, with the left (right) state denoting the control (target) state will produce
+\begin{align*}
+    C-\hat{U}^{2^t} \left[\frac{1}{\sqrt{2}}(\ket{0}+\ket{1}) \otimes \ket{\Psi}\right] &{} = \frac{1}{\sqrt{2}}\left(\ket{0}+\left(e^{2\pi i \phi}\right)^{2^t}\ket{1}\right) \otimes \ket{\Psi}\\
+    &{} = \frac{1}{\sqrt{2}}\left(\ket{0}+\left(e^{2^t . 2\pi i \phi}\right)\ket{1}\right) \otimes \ket{\Psi}
+\end{align*}
+
+\begin{figure}
+    \centering
+\includegraphics[width=0.99\textwidth]{QPE.png}
+    \caption{Circuit for performing quantum phase estimation}
+    \label{QPE_circuit}
+\end{figure}
+
+Now let us look at the circuit in Fig.~\ref{QPE_circuit}. We prepare the control register, consisting of $n$ qubits, with each qubit initially in state $\ket{0}$. The state $\ket{\Psi}$ is fed into the target register. 
+
+\begin{enumerate}
+    \item Then, at point 1, each control qubit (with index ranging from $n-1$, which is the topmost control qubit, to 0, which is the bottommost control qubit) is in $\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)$ and the state of the entire system is
+    \begin{align*}
+        \ket{\Phi_1}&{}=\left[\otimes_{l=n-1}^{0}\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)\right]\otimes\ket{\Psi}\\
+        &{}=\left[\frac{1}{\sqrt{2^n}}\sum_{j=0}^{2^n-1}\ket{j}\right]\otimes\ket{\Psi},
+    \end{align*}
+    where $\ket{j}$ denotes the $j$-th computational basis
+    \item Next a controlled-$\hat{U}^{2^0}$ gate is operated on the target state $\ket{\Psi}$ with the $0$-th qubit of the control register acting as the control qubit. The resulting state at point 2 is
+    \begin{align*}
+        \ket{\Phi_2}=\left[\otimes_{l=n-1}^{1}\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)\right] \otimes \frac{1}{\sqrt{2}}\left(\ket{0}+\left(e^{2^0 . 2\pi i \phi}\right)\ket{1}\right) \otimes \ket{\Psi}
+    \end{align*}
+    \item Similarly, the state at point 3 is
+    \begin{align*}
+        \ket{\Phi_3}=\left[\otimes_{l=n-1}^{2}\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)\right] \otimes \frac{1}{\sqrt{2}}\left(\ket{0}+\left(e^{2^1 . 2\pi i \phi}\right)\ket{1}\right) \otimes \frac{1}{\sqrt{2}}\left(\ket{0}+\left(e^{2^0 . 2\pi i \phi}\right)\ket{1}\right) \otimes \ket{\Psi}
+    \end{align*}
+    \item Ultimately, at point 4, the state of the system becomes
+    \begin{align*}\label{QPE_4}
+        \ket{\Phi_4}&{}= \frac{1}{\sqrt{2^n}}\left(\ket{0}+e^{2\pi i 2^{n-1}\phi}\ket{1}\right)\otimes\hdots\otimes \left(\ket{0}+e^{2\pi i 2^0\phi}\ket{1}\right)\otimes \ket{\Psi}\\
+        &{}= \left[\frac{1}{\sqrt{2^n}} \sum_{j=0}^{2^n-1}e^{2\pi i j \phi}\ket{j}\right]\ket{\Psi}\numberthis
+    \end{align*}
+    If, for some integer $k<2^n$, we have $\phi=\frac{k}{2^n}$, then from Eq.~\ref{QFT_2}, the term inside the square brackets can be seen to be $\hat{U}_{\mathrm{QFT}}\ket{k}$.
+    \item Thus, if $\phi=\frac{k}{2^n}$, then an inverse QFT of the $n$ control qubits will produce, at point 5, the computational basis vector $\ket{k}=\ket{2^n\phi}$ will full certainty. This will conclude the process of finding the eigenvalue of $\ket{\Psi}$. The target register stays at state $\ket{\Psi}$.
+    
+    If $\phi \neq \frac{k}{2^n}$ for any integer $k<2^n$, then the inverse QFT of the  quantity inside the square brackets in Eq.~\ref{QPE_4} will not be a computational basis vector, but rather a linear combination thereof. Thus, upon measurement, the control register will collapse, with high probability, to the computational basis vector corresponding to the closest integral approximation of $2^n\phi$.
+\end{enumerate}
 \end{document}
