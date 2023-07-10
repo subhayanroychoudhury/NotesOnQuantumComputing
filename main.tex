@@ -416,7 +416,9 @@ Naturally,
 \end{align*}
 where, in the second line we have used Eq.~\ref{QFT_2} and in the fourth line we have used Eq.~\ref{Fourier_tilde_expansion}. Therefore, as expected from the linearity of the QFT operator, if we use a generic state $\ket{X}$ as the input for the circuit of Fig.~\ref{QFT_circuit}, the output, read in the reverse order, will be its QFT.
 
-If we want the discrete Fourier transform of the sequence $\{f(0),f(1),\hdots,f(N-1)\}$, then, first of all, we have to prepare the input state as $\sum_{j=0}^{N-1}f(j)\ket{j}$ (unfortunately, this is not always possible in an efficient manner). Then we will feed this into the circuit of Fig.~\ref{QFT_circuit} and measure the output. If we repeat the entire process for say, $\tau$ number of times, then different measurements will collapse the final state to different vectors of the computational basis.
+If we want the discrete Fourier transform of the sequence $\{f(0),f(1),\hdots,f(N-1)\}$, then, first of all, we have to prepare the input state as $\sum_{j=0}^{N-1}f(j)\ket{j}$ (unfortunately, this is not always possible in an efficient manner). Then we will feed this into the circuit of Fig.~\ref{QFT_circuit} and measure the output. If we repeat the entire process for say, $\tau$ number of times, then at different iterations, the measurement will collapse the final state to different vectors of the computational basis.
 %
 If the number of collapses to the state $\ket{k}$, recorded in the reverse order, is $\tau_k$, then we can conclude that $\tilde{f}(k)=\left(\frac{\tau_k}{\tau}\right)^{0.5}$.
+
+Notably, excluding the number of operations required for the preparation of the initial state, the number of operations required in the circuit (Fig.~\ref{QFT_circuit}) is $n + (n-1) + \hdots + 1=\frac{n(n+1)}{2}$, which scales polynomially with respect to the number of qubits.
 \end{document}
