@@ -256,13 +256,13 @@ Acting on the 2-qubit state $\ket{+0}$, this will produce
 This can not be written as a tensor product of 2 single-qubit states. If we measure the state of the first qubit (in this context, when I say ``measure the state'' of a qubit, what I mean is ``measure the observable corresponding to the operator $\hat{Z}$, for which the eigenvectors are $\ket{0}$ and $\ket{1}$) and get, for example, the eigenvalue corresponding to $\ket{1}$, then we know immediately that the entire 2-qubit system must have collapsed to the state $\ket{11}$. Therefore, if we measure the state of the second qubit immediately, we are guaranteed to get $\ket{0}$. Thus, in the state $\hat{\mathrm{CNOT}}\ket{0+}$, the two qubits are entangled! Under these circumstances, there is no such thing as ``state of the first qubit'' or ``state of the second qubit''.
 
 The controlled rotation CROT gate is another example of a contolled gate. This gate performs a rotation operation $\hat{U}_\theta$ by a predefined angle $\theta$ such that
-\begin{align*}   \hat{U}_\theta\ket{\psi}=e^{i\theta}\ket{\psi}
-\end{align*}
+\begin{align}\label{kickback1}   \hat{U}_\theta\ket{\psi}=e^{i\theta}\ket{\psi}
+\end{align}
 on the target qubit, if the control qubit is $\ket{1}$.
 
 Let us operate this on the 2-qubit state $$\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)\otimes\ket{1} = \frac{1}{\sqrt{2}}\left(\ket{01}+\ket{11}\right)$$. This should produce
-\begin{align*}
-    \frac{1}{\sqrt{2}}\left(\ket{01}+\exp^{i\theta}\ket{11}\right) = \frac{1}{\sqrt{2}} \left(\ket{0}+\exp^{i\theta}\ket{1}\right)\otimes\ket{1}
+\begin{align*}\label{kickback2}
+    \frac{1}{\sqrt{2}}\left(\ket{01}+\exp^{i\theta}\ket{11}\right) = \frac{1}{\sqrt{2}} \left(\ket{0}+\exp^{i\theta}\ket{1}\right)\otimes\ket{1}\numberthis
 \end{align*}.
 Interestingly, the operation has altered the state of the control qubit from $\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)$ to $\frac{1}{\sqrt{2}}\left(\ket{0}+\exp^{i\theta}\ket{1}\right)$, leaving the state of the target qubit intact at $\ket{1}$. In other words, a rotation was essentially applied to the control qubit, even though the rotation operator $\hat{U}_\theta$ acted only on the target qubit. The result of the phase-rotation of the target qubit is effectively kicked back onto the control qubit. This effect is called \textbf{phase kickback}.
 Now we will use this effect to construct a quantum circuit that can solve a crucial problem, namely that of finding the discreet Fourier transform.
@@ -421,4 +421,22 @@ If we want the discrete Fourier transform of the sequence $\{f(0),f(1),\hdots,f(
 If the number of collapses to the state $\ket{k}$, recorded in the reverse order, is $\tau_k$, then we can conclude that $|\tilde{f}(k)|=\left(\frac{\tau_k}{\tau}\right)^{0.5}$.
 
 Notably, excluding the number of operations required for the preparation of the initial state, the number of operations required in the circuit (Fig.~\ref{QFT_circuit}) is $n + (n-1) + \hdots + 1=\frac{n(n+1)}{2}$, which scales polynomially with respect to the number of qubits.
+
+\subsection*{QPE}
+
+Now we will tackle a problem with potentially paramount importance in electronic structure theory. Given an operator in the qubit space (later we will discuss how to represent an electronic operator in the qubit space), how can we find its eigenvalues and eigenstates(we have already seen how to represent a many-electron state with qubits).
+%
+To this end, let us start with a simpler problem.
+%
+Given an operator and one of its eigenstates in the qubit space, how can we find the corresponding eigenvalue?
+%
+Let the operator and the state be $\hat{H}$ and $\ket{\Psi}$, respectively, such that 
+\begin{align}
+    \hat{H}\ket{\Psi}=\phi\ket{\Psi},
+\end{align}
+$\phi$ being the eigenvalue. Naturally, we can construct an operator $\hat{U}=e^{2\pi i \hat{H}}$ such that
+\begin{align}
+    \hat{U}\ket{\Psi}=e^{2\pi i \phi}\ket{\Psi}.
+\end{align}
+From our earlier example of phase-kickback (see Eq.~\ref{kickback1} and~\ref{kickback2}), it is easy to see that if $\hat{U}$ is operated as a controlled gate on the target state $\ket{\Psi}$, with the control qubit being in state $\frac{1}{\sqrt{2}}(\ket{0}+\ket{1})$, then the control qubit will be rotated by an angle dependent on the eigenvalue of $\ket{\Psi}$. This is the property we will exploit for our goal.
 \end{document}
