@@ -430,11 +430,11 @@ To this end, let us start with a simpler problem.
 %
 Given an operator and one of its eigenstates in the qubit space, how can we find the corresponding eigenvalue?
 %
-Let the operator and the state be $\hat{H}$ and $\ket{\Psi}$, respectively, such that 
+Let the operator and the state be $\hat{O}$ and $\ket{\Psi}$, respectively, such that 
 \begin{align}
-    \hat{H}\ket{\Psi}=\phi\ket{\Psi},
+    \hat{O}\ket{\Psi}=\phi\ket{\Psi},
 \end{align}
-$\phi$ being the eigenvalue. Naturally, we can construct an operator $\hat{U}=e^{2\pi i \hat{H}}$ such that
+$\phi$ being the eigenvalue. Naturally, we can construct an operator $\hat{U}=e^{2\pi i \hat{O}}$ such that
 \begin{align}
     \hat{U}\ket{\Psi}=e^{2\pi i \phi}\ket{\Psi}.
 \end{align}
@@ -483,5 +483,25 @@ Now let us look at the circuit in Fig.~\ref{QPE_circuit}. We prepare the control
     \end{align}
     
     If $\phi \neq \frac{k}{2^n}$ for any integer $k<2^n$, then the inverse QFT of the  quantity inside the square brackets in Eq.~\ref{QPE_4} will not be a computational basis vector, but rather a linear combination thereof. Thus, upon measurement, the control register will collapse, with high probability, to the computational basis vector corresponding to the closest integral approximation of $2^n\phi$.
+\end{enumerate}
+
+This does not seem to be very helpful in this particular form. After all, if the goal is to find an eigenvalue $\phi$ of $\hat{O}$, we will probably not know the corresponding eigenvector $\ket{\Psi}$. Let us see what happens if, instead of the eigenstate $\ket{\Psi}$, we insert a generic state
+\begin{align}
+    \ket{V}=\sum_p \alpha_p\ket{\Psi_p}
+\end{align}
+in the target register such that
+\begin{align}
+    \hat{O}\ket{\Psi_p}=\phi_p\ket{\Psi_p}.
+\end{align}
+Note that if $\hat{O}$ is associated with any observable, then it is Hermitian and therefore, any generic state can be expressed as a linear combination of its eigenstates.
+\begin{enumerate}
+    \item Now, at point 1, we have
+    \begin{align*}
+        \ket{\Phi_1}=\sum_p \alpha_p \left[\frac{1}{\sqrt{2^n}}\sum_{j=0}^{2^n-1}\ket{j}\right]\otimes\ket{\Psi_p}
+    \end{align*}
+    \item At point 5, the state would be
+    \begin{align*}
+        \ket{\Phi_5}=\sum_p \alpha_p \left[\frac{1}{\sqrt{2^n}} \sum_{j=0}^{2^n-1}e^{2\pi i j \phi_p}\ket{j}\right]\otimes\ket{\Psi_p}
+    \end{align*}
 \end{enumerate}
 \end{document}
