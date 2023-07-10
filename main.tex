@@ -400,6 +400,23 @@ Now let us take a close look at Fig.~\ref{QFT_circuit}.
 \begin{align*}
     \frac{1}{\sqrt{2^n}} \left(\ket{0}+e^{2\pi i\frac{j}{2^n}}\ket{1}\right) \otimes \left(\ket{0}+e^{2\pi i\frac{j}{2^{n-1}}}\ket{1}\right) \otimes \hdots \otimes \left(\ket{0} + e^{\frac{2\pi ij}{2}}\ket{1}\right)
 \end{align*}
+\item If we could record this output in the reverse order (i.e., topmost qubit first), we would obtain the expression on the RHS of Eq.~\ref{QFT_main}.
 \end{enumerate}
 
+What we have done here is to show that if the input of the circuit (Fig.~\ref{QFT_circuit}) is the computational basis vector $\ket{j}$, then the output, in the reverse order of qubits, is the state on the RHS of Eq.~\ref{QFT_main}. If this state is written as a linear combination of the computational basis vectors, then one recovers the expression on the RHS of Eq.~\ref{QFT_2} such that the coefficients of expansion denote the discreet Fourier transform of a sequence of numbers given by $\{\delta_{1,j}, \delta_{2,j}, \hdots, \delta_{j,j},\hdots,\delta_{N,j}\}$ (which are essentially the coefficients of expansion of $\ket{j}$ with respect to the computational basis).
+
+How can we go about finding the QFT of a generic state $\ket{X}=\sum_{j=0}^{2^n-1} f(j)\ket{j}$? 
+
+Naturally,
+\begin{align*}\label{QFT_generic}
+    \hat{U}_{\mathrm{QFT}}\ket{X} &{}= \sum_{j=0}^{2^n-1} f(j) \hat{U}_{\mathrm{QFT}} \ket{j}\\
+    &{}=\frac{1}{\sqrt{N}} \sum_{j=0}^{N-1} f(j) \left(\sum_{k=0}^{N-1}e^{2\pi ij\frac{k}{N}}\ket{k}\right)\\
+    &{} = \frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} \left( \sum_{j=0}^{N-1} f(j) e^{2\pi ij\frac{k}{N}}\right) \ket{k}\\
+    &{} = \frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} \tilde{f}(k)\ket{k},\numberthis
+\end{align*}
+where, in the second line we have used Eq.~\ref{QFT_2} and in the fourth line we have used Eq.~\ref{Fourier_tilde_expansion}. Therefore, as expected from the linearity of the QFT operator, if we use a generic state $\ket{X}$ as the input for the circuit of Fig.~\ref{QFT_circuit}, the output, read in the reverse order, will be its QFT.
+
+If we want the discrete Fourier transform of the sequence $\{f(0),f(1),\hdots,f(N-1)\}$, then, first of all, we have to prepare the input state as $\sum_{j=0}^{N-1}f(j)\ket{j}$ (unfortunately, this is not always possible in an efficient manner). Then we will feed this into the circuit of Fig.~\ref{QFT_circuit} and measure the output, say, $\tau$ number of times. Different measurements will collapse the final state to different vectors of the computational basis.
+%
+If the number of collapses to the state $\ket{k}$, recorded in the reverse order, is $\tau_k$, then we can conclude that $\tilde{f}(k)=\left(\frac{\tau_k}{\tau}\right)^{0.5}$.
 \end{document}
