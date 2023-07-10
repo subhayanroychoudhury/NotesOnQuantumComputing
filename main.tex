@@ -477,6 +477,10 @@ Now let us look at the circuit in Fig.~\ref{QPE_circuit}. We prepare the control
     \end{align*}
     If, for some integer $k<2^n$, we have $\phi=\frac{k}{2^n}$, then from Eq.~\ref{QFT_2}, the term inside the square brackets can be seen to be $\hat{U}_{\mathrm{QFT}}\ket{k}$.
     \item Thus, if $\phi=\frac{k}{2^n}$, then an inverse QFT of the $n$ control qubits will produce, at point 5, the computational basis vector $\ket{k}=\ket{2^n\phi}$ will full certainty. This will conclude the process of finding the eigenvalue of $\ket{\Psi}$. The target register stays at state $\ket{\Psi}$.
+
+    \begin{align}
+        \ket{\Phi_5}=\ket{2^n\phi}\otimes\ket{\Psi}
+    \end{align}
     
     If $\phi \neq \frac{k}{2^n}$ for any integer $k<2^n$, then the inverse QFT of the  quantity inside the square brackets in Eq.~\ref{QPE_4} will not be a computational basis vector, but rather a linear combination thereof. Thus, upon measurement, the control register will collapse, with high probability, to the computational basis vector corresponding to the closest integral approximation of $2^n\phi$.
 \end{enumerate}
