@@ -77,31 +77,31 @@ where we have defined
 For the sake of computational feasibility, we need to work with a discrete set of points within a real space grid. Then, we need to replace the integral with a sum as
 
 \begin{align}\label{OneP_Expansion}
-    \ket{\phi} = \sum_{i=1}^M \phi_i \ket{\mathbf{r}_i},
+    \ket{\phi} = \sum_{i=1}^m \phi_i \ket{\mathbf{r}_i},
 \end{align}
-where $M$ denotes the total number of grid points, $\ket{\mathbf{r}_i}$ is the position-vector associated with the $i$-th grid point, and 
+where $m$ denotes the total number of grid points, $\ket{\mathbf{r}_i}$ is the position-vector associated with the $i$-th grid point, and 
 \begin{align}
     \phi_i=\braket{\mathbf{r}_i|\phi}.
 \end{align}
 
-Eq.~\ref{OneP_Expansion} shows that, in this representation, our basis set $\{\ket{\mathbf{r}_1}, \ket{\mathbf{r}_2},\hdots, \ket{\mathbf{r}_M}\}$ has $M$ number of basis vectors. What happens if, instead of a single particle, we need to describe a two-particle state within the same grid? Now our basis set becomes something like
+Eq.~\ref{OneP_Expansion} shows that, in this representation, our basis set $\{\ket{\mathbf{r}_1}, \ket{\mathbf{r}_2},\hdots, \ket{\mathbf{r}_m}\}$ has $m$ number of basis vectors. What happens if, instead of a single particle, we need to describe a two-particle state within the same grid? Now our basis set becomes something like
 \begin{align*}
-    \{\ket{\mathbf{r}_1\mathbf{r}_1}, \ket{\mathbf{r}_1\mathbf{r}_2} , \hdots , \ket{\mathbf{r}_1\mathbf{r}_M}, \ket{\mathbf{r}_2\mathbf{r}_1} , \ket{\mathbf{r}_2\mathbf{r}_2}, \hdots , \ket{\mathbf{r}_2\mathbf{r}_M}, \hdots , \ket{\mathbf{r}_M\mathbf{r}_1}, \ket{\mathbf{r}_M\mathbf{r}_2}, \hdots , \ket{\mathbf{r}_M\mathbf{r}_M}\},
+    \{\ket{\mathbf{r}_1\mathbf{r}_1}, \ket{\mathbf{r}_1\mathbf{r}_2} , \hdots , \ket{\mathbf{r}_1\mathbf{r}_m}, \ket{\mathbf{r}_2\mathbf{r}_1} , \ket{\mathbf{r}_2\mathbf{r}_2}, \hdots , \ket{\mathbf{r}_2\mathbf{r}_m}, \hdots , \ket{\mathbf{r}_m\mathbf{r}_1}, \ket{\mathbf{r}_m\mathbf{r}_2}, \hdots , \ket{\mathbf{r}_m\mathbf{r}_m}\},
 \end{align*}
 where 
 \begin{align*}
 \ket{\mathbf{r}_i \mathbf{r}_j} = \ket{\mathbf{r}_i}\otimes\ket{\mathbf{r}_j}.
 \end{align*}
 
-Thus, we now have $M^2$ basis vectors in our set. Generalizing to an $N$-particle system, we will need $M^N$ number of basis vectors, implying that the generic state resides in a $M^N$ dimensional space. This is an example of exponential scaling with respect to the number of particles.
+Thus, we now have $m^2$ basis vectors in our set. Generalizing to an $N$-particle system, we will need $m^N$ number of basis vectors, implying that the generic state resides in a $m^N$ dimensional space. This is an example of exponential scaling with respect to the number of particles.
 
 For the purpose of describing a many-electron system, a couple of additional points need to be taken into account.
 \begin{enumerate}
     \item Electrons have an additional \textit{spin} degree of freedom, which, for a single particle, requires two basis vectors. Denoting such a basis-set by $\{\ket{\uparrow},\ket{\downarrow}\}$, the single-electron basis set must now be modified to 
     \begin{align*}
-        \{\ket{\mathbf{r}_1}\otimes\ket{\uparrow}, \ket{\mathbf{r}_1}\otimes\ket{\downarrow}, \ket{\mathbf{r}_2}\otimes\ket{\uparrow}, \ket{\mathbf{r}_2}\otimes\ket{\downarrow},\hdots, \ket{\mathbf{r}_M}\otimes\ket{\uparrow}, \ket{\mathbf{r}_M}\otimes\ket{\downarrow}\}
+        \{\ket{\mathbf{r}_1}\otimes\ket{\uparrow}, \ket{\mathbf{r}_1}\otimes\ket{\downarrow}, \ket{\mathbf{r}_2}\otimes\ket{\uparrow}, \ket{\mathbf{r}_2}\otimes\ket{\downarrow},\hdots, \ket{\mathbf{r}_M}\otimes\ket{\uparrow}, \ket{\mathbf{r}_M}\otimes\ket{\downarrow}\}.
     \end{align*}
-    This has $2M$ basis vectors.  We shall call them spin-orbitals in the position basis. By extension, for $N$-particles, we will need $(2M)^N$ basis vectors. We will use the notation $\ket{\mathbf{r}_i^\alpha}$ to denote $\ket{\mathbf{r}_i}\otimes\ket{\alpha}$, for $\alpha \in \{\uparrow,\downarrow\}$.
+    This has $M = 2m$ number of basis vectors.  We shall call them spin-orbitals in the position basis. By extension, for $N$-particles, we will need $(M)^N$ basis vectors. For $\alpha \in \{\uparrow,\downarrow\}$, we will use the notation $\ket{\mathbf{r}_i^\alpha}$ to denote $\ket{\mathbf{r}_i}\otimes\ket{\alpha}$.
     \item Electrons are indistinguishable particles with wavefunctions that are antisymmetric with respect to an exchange of any two electrons. This implies, for example, that
     \begin{align}
         \ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta} = -\ket{\mathbf{r}_j^\beta\mathbf{r}_i^\alpha},
@@ -115,13 +115,13 @@ For the purpose of describing a many-electron system, a couple of additional poi
 
 \end{enumerate}
 
-Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons. These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied orbitals from a total number of $2M$. Therefore, instead of $(2M)^N$, now the number of basis-vectors in our set should be $_{2M}C_N$ (the binomial coefficient \textit{$2M$ choose $N$}). Let us find out what these basis vectors should look like.
+Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons. These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied spin-orbitals from a total number of $M$. Therefore, instead of $(M)^N$, now the number of basis-vectors in our set should be $_{M}C_N$ (the binomial coefficient \textit{$M$ choose $N$}). Let us find out what these basis vectors should look like.
 
-If there are $M$ number of spin-orbitals, then any such basis vector (Slater determinant) can be written as
+If there are $M$ number of spin-orbitals, then any such basis vector (Slater determinant) can be expressed as
 \begin{align}\label{SD_OccupationRepresentation}
     \mathrm{SD}=\ket{j_{M-1}j_{M-2}\hdots j_1 j_0},
 \end{align}
-where for any $i=0,\hdots,M-1$, the value of $j_i$ can be either 0 or 1. In this convention, $j_i=0$ and $j_i=1$ will indicate, respectively, that the $(i+1)$-th spin-orbital is empty and occupied. Since each spin-orbital can only have two possible occupancies (0 or 1), the number of possible Slater determinants can not exceed $2^M$. However, if the total number of electrons is known to be $N$, then we know that every Slater determinant must have exactly $N$ number of occupied orbitals. Then, as mentioned earlier, the possible number of Slater determinants boils down to $_MC_N$, which, for any $N$, can never exceed $2^M$.
+where, for any $i=0,\hdots,M-1$, the value of $j_i$ can be either 0 or 1. In this convention, $j_i=0$ and $j_i=1$ will indicate, respectively, that the $(i+1)$-th spin-orbital is empty and occupied. Since each spin-orbital can only have two possible occupancies (0 or 1), the number of possible Slater determinants can not exceed $2^M$. However, if the total number of electrons is known to be $N$, then we know that every Slater determinant must have exactly $N$ number of occupied orbitals. Then, as mentioned earlier, the possible number of Slater determinants boils down to $_MC_N$, which, for any $N$, can never exceed $2^M$.
 
 Let us take a concrete example. If there are 2 electrons in our system (like in a hydrogen molecule), then, the representation of an arbitrary electronic state on a $10 \times 10 \times 10$ real space grid will require $_{2000}C_2$ i.e, 1999000 basis vectors. Consequently, we need to store 1999000 number of coefficients if we want to store this state (written as a linear combination of the basis vectors) on a computer. Assuming each coefficient requires a byte of storage, we will need slightly less than 2 MB. 
 
@@ -164,7 +164,7 @@ $\begin{pmatrix}
         1
     \end{pmatrix}$, respectively.
 
-A tensor product of $\ket{a}$ and $\ket{b}=b_0\ket{0}+b_1\ket{1}$ is then given by
+A tensor product of $\ket{a}$ (Eq.~\ref{Eq1}) and $\ket{b}=b_0\ket{0}+b_1\ket{1}$ is then given by
 
 \begin{align}\label{Eq2}
     \ket{ab}=\ket{a}\otimes\ket{b}=a_0b_0 \ket{0}\otimes\ket{0} + a_0b_1 \ket{0}\otimes\ket{1} +a_1b_0 \ket{1}\otimes\ket{0} + a_1b_1\ket{1}\otimes\ket{1}.
@@ -196,15 +196,15 @@ From the discussion presented above, we can see that any computational basis-vec
 \begin{align}\label{M_qubit_basis}
     \ket{B} = \ket{q_{M-1}q_{M-2}\hdots q_1 q_0},
 \end{align}
-where, for any $i=0,\hdots,M-1$, the value of $q_i$ can be either 0 or 1. It is easy to notice the resemblance between Eq.~\ref{M_qubit_basis}, i.e., a basis-vector of the $M$-qubit Hilbert space and Eq.~\ref{SD_OccupationRepresentation}, a basis-vector for a many-electron system with $M$ spin-orbitals. Therefore, in order to represent an arbitrary many-electron state using qubits, we can adopt a convention whereby, the $i$-th qubit being in state $\ket{1}$ will indicate that the $(i+1)$-th spin-orbital is occupied while the state $\ket{0}$ for the qubit will indicate an unoccupied $(i+1)$-th spin-orbital. Then, any general many-electron state of any number of electrons ($<M$), expressible as a linear-combination of Slater determinants (Eq.~\ref{SD_OccupationRepresentation}) composed of $M$ spin-orbitals, can be represented by some general $M$-qubit state constructed as a linear-combination of the computational basis-vectors (Eq.~\ref{M_qubit_basis}).  
+where, for any $i=0,\hdots,M-1$, the value of $q_i$ can be either 0 or 1. It is easy to notice the resemblance between Eq.~\ref{M_qubit_basis}, i.e., a basis-vector of the $M$-qubit Hilbert space and Eq.~\ref{SD_OccupationRepresentation}, a basis-vector for a many-electron system with $M$ spin-orbitals. Therefore, in order to represent an arbitrary many-electron state using qubits, we can adopt a convention whereby, the $i$-th qubit being in state $\ket{1}$ will indicate that the $(i+1)$-th spin-orbital is occupied while the state $\ket{0}$ for the same qubit will indicate an unoccupied $(i+1)$-th spin-orbital. Then, any general many-electron state of any number ($<M$) of electrons, expressible as a linear-combination of Slater determinants composed of $M$ spin-orbitals (see Eq.~\ref{SD_OccupationRepresentation}), can be represented by some general $M$-qubit state constructed as a linear-combination of the computational basis-vectors (Eq.~\ref{M_qubit_basis}). Thus, in contrast with a conventional computer which requires $_MC_N$ bytes to store an $N$-electron state (as discussed earlier, this number is $\sim 10^{87}$ for a benzene molecule on a $10 \times 10 \times 10$ space grid), a quantum computer can store the same state with $M$ qubits (i.e., 2000 qubits for the benzene example).
 
-Being able to merely represent a many-electrons states with the help of qubits is not enough. Typically, we would be interested in \textit{solving} an electronic-structure problem such as finding a specific eigenstate of a given operator, finding the evolution of a given state with time, etc. To this end, we will typically need the ability to apply operators (for example, the Hamiltonian or the time-evolution operator) on the many-electron states. In the context of quantum computation, this, naturally, means that we need operators for the qubit space. 
+However, being able to merely represent a many-electrons states with the help of qubits is not enough. Typically, we would be interested in \textit{solving} an electronic-structure problem such as finding a specific eigenstate of a given operator, finding the evolution of a given state with time, etc. To this end, we will typically need the ability to apply operators (for example, the Hamiltonian or the time-evolution operator) on the many-electron states. In the context of quantum computation, this, naturally, means that we need operators for the qubit space. 
 
 \subsection*{Quantum Gates}
 
-In the context of quantum-circuits, an $N$-qubit operator is essentially an $N$-qubit gate that changes an $N$-qubit quantum state from some initial state $\ket{I}$ to some final state $\ket{F}$.
+In the context of quantum-circuits, an $n$-qubit operator is essentially an $n$-qubit gate that changes an $n$-qubit quantum state from some initial state $\ket{I}$ to some final state $\ket{F}$.
 
-Naturally, an operator in an $N$-dimensional space can be uniquely defined by specifying its actions on the basis functions (which are $N$ in number) of any basis set of that space. Working with the choice of basis set introduced earlier, the Hadamard gate $\hat{H}$ for the 1-qubit space can be defined as
+Naturally, an operator in an $N$-dimensional space can be uniquely defined by specifying its actions on the basis functions (which are $N$ in number) of any basis set of that space. Working with the computational basis set introduced earlier, the Hadamard gate $\hat{H}$ for the 1-qubit space can be defined as
 \begin{align*}\label{Hadamard}
     \hat{H}\ket{0} &{}= \frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right) = \ket{+}\\
     \hat{H}\ket{1} &{}= \frac{1}{\sqrt{2}}\left(\ket{0}-\ket{1}\right) = \ket{-}\numberthis
