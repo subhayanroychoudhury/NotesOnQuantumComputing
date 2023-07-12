@@ -442,9 +442,9 @@ $\phi$ being the eigenvalue. Naturally, we can construct an operator $\hat{U}=e^
 From our earlier example of phase-kickback (see Eq.~\ref{kickback1} and~\ref{kickback2}), it is easy to see that if $\hat{U}$ is operated as a controlled gate on the target state $\ket{\Psi}$, with the control qubit being in state $\frac{1}{\sqrt{2}}(\ket{0}+\ket{1})$, then the control qubit will be rotated by an angle dependent on the eigenvalue of $\ket{\Psi}$. This is the property we will exploit for our goal.
 
 In particular, the operation of Controlled-$\hat{U}^{2^t}$ on $\frac{1}{\sqrt{2}}(\ket{0}+\ket{1}) \otimes \ket{\Psi}$, with the left (right) state denoting the control (target) state will produce
-\begin{align*}
+\begin{align*}\label{representativeCROT}
     C-\hat{U}^{2^t} \left[\frac{1}{\sqrt{2}}(\ket{0}+\ket{1}) \otimes \ket{\Psi}\right] &{} = \frac{1}{\sqrt{2}}\left(\ket{0}+\left(e^{2\pi i \phi}\right)^{2^t}\ket{1}\right) \otimes \ket{\Psi}\\
-    &{} = \frac{1}{\sqrt{2}}\left(\ket{0}+\left(e^{2^t . 2\pi i \phi}\right)\ket{1}\right) \otimes \ket{\Psi}
+    &{} = \frac{1}{\sqrt{2}}\left(\ket{0}+\left(e^{2^t . 2\pi i \phi}\right)\ket{1}\right) \otimes \ket{\Psi}\numberthis
 \end{align*}
 
 \begin{figure}
@@ -454,7 +454,7 @@ In particular, the operation of Controlled-$\hat{U}^{2^t}$ on $\frac{1}{\sqrt{2}
     \label{QPE_circuit}
 \end{figure}
 
-Now let us look at the circuit in Fig.~\ref{QPE_circuit}. We prepare the control register, consisting of $n$ qubits, with each qubit initially in state $\ket{0}$. The state $\ket{\Psi}$ is fed into the target register. 
+Now let us look at the circuit in Fig.~\ref{QPE_circuit}. We prepare the control register, consisting of $n$ qubits, with each qubit initially in state $\ket{0}$. The state $\ket{\Psi}$ is fed into the target register.
 
 \begin{enumerate}
     \item Then, at point 1, each control qubit (with index ranging from $n-1$, which is the topmost control qubit, to 0, which is the bottommost control qubit) is in $\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)$ and the state of the entire system is
@@ -463,7 +463,7 @@ Now let us look at the circuit in Fig.~\ref{QPE_circuit}. We prepare the control
         &{}=\left[\frac{1}{\sqrt{2^n}}\sum_{j=0}^{2^n-1}\ket{j}\right]\otimes\ket{\Psi},
     \end{align*}
     where $\ket{j}$ denotes the $j$-th computational basis
-    \item Next a controlled-$\hat{U}^{2^0}$ gate is operated on the target state $\ket{\Psi}$ with the $0$-th qubit of the control register acting as the control qubit. The resulting state at point 2 is
+    \item Next a controlled-$\hat{U}^{2^0}$ gate is operated on the target state $\ket{\Psi}$ with the $0$-th qubit of the control register acting as the control qubit. In accordance with Eq.~\ref{representativeCROT}, the resulting state at point 2 is
     \begin{align*}
         \ket{\Phi_2}=\left[\otimes_{l=n-1}^{1}\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)\right] \otimes \frac{1}{\sqrt{2}}\left(\ket{0}+\left(e^{2^0 . 2\pi i \phi}\right)\ket{1}\right) \otimes \ket{\Psi}
     \end{align*}
@@ -486,7 +486,7 @@ Now let us look at the circuit in Fig.~\ref{QPE_circuit}. We prepare the control
     If $\phi \neq \frac{k}{2^n}$ for any integer $k<2^n$, then the inverse QFT of the  quantity inside the square brackets in Eq.~\ref{QPE_4} will not be a computational basis vector, but rather a linear combination thereof. Thus, upon measurement, the control register will collapse, with high probability, to the computational basis vector corresponding to the closest integral approximation of $2^n\phi$.
 \end{enumerate}
 
-This does not seem to be very helpful in this particular form. After all, if the goal is to find an eigenvalue $\phi$ of $\hat{O}$, we will probably not know the corresponding eigenvector $\ket{\Psi}$. Let us see what happens if, instead of the eigenstate $\ket{\Psi}$, we insert a generic state
+This does not seem to be very helpful in this particular form. After all, if the goal is to find an eigenvalue $\phi$ of $\hat{O}$, we will probably not know the corresponding eigenvector $\ket{\Psi}$ in the first place. Let us see what happens if, instead of the eigenstate $\ket{\Psi}$, we insert a generic state
 \begin{align}
     \ket{V}=\sum_p \alpha_p\ket{\Psi_p}
 \end{align}
