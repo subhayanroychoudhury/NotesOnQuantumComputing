@@ -393,7 +393,7 @@ Now let us take a close look at Fig.~\ref{QFT_circuit}.
     \end{align*}
     where we have used Eq.~\ref{EqBinaryExpansion}.
     From now on, the topmost qubit remains unchanged.
-    \item In a similar manner, beyond point 6, the the next qubit (the one below the topmost qubit) remains unchanged. At this point, the state of the system is
+    \item In a similar manner, beyond point 6, the next qubit (the one below the topmost qubit) remains unchanged. At this point, the state of the system is
     \begin{align*}
         \left(\ket{0}+e^{2\pi i\frac{j}{2^n}}\ket{1}\right) \otimes \left(\ket{0}+e^{2\pi i\frac{j}{2^{n-1}}}\ket{1}\right) \otimes \frac{1}{\sqrt{2^2}}\ket{j_{n-2}\hdots j_0}
     \end{align*}
@@ -404,7 +404,7 @@ Now let us take a close look at Fig.~\ref{QFT_circuit}.
 \item If we could record this output in the reverse order (i.e., topmost qubit first), we would obtain the expression on the RHS of Eq.~\ref{QFT_main}.
 \end{enumerate}
 
-What we have done here is to show that if the input of the circuit (Fig.~\ref{QFT_circuit}) is the computational basis vector $\ket{j}$, then the output, in the reverse order of qubits, is the state on the RHS of Eq.~\ref{QFT_main}. If this state is written as a linear combination of the computational basis vectors, then one recovers the expression on the RHS of Eq.~\ref{QFT_2} such that the coefficients of expansion denote the discreet Fourier transform of a sequence of numbers given by $\{\delta_{1,j}, \delta_{2,j}, \hdots, \delta_{j,j},\hdots,\delta_{N,j}\}$ (which are essentially the coefficients of expansion of $\ket{j}$ with respect to the computational basis).
+What we have done here is to show that if the input of the circuit (Fig.~\ref{QFT_circuit}) is the computational basis vector $\ket{j}$, then the output, in the reverse order of qubits, is the state on the RHS of Eq.~\ref{QFT_main}. If this state is written as a linear combination of the computational basis vectors, then one recovers the expression on the RHS of Eq.~\ref{QFT_2}. As expected, the coefficients of expansion denote the discreet Fourier transform of a sequence of numbers $\{\delta_{1,j}, \delta_{2,j}, \hdots, \delta_{j,j},\hdots,\delta_{N,j}\}$ (which are essentially the coefficients of expansion of $\ket{j}$ with respect to the computational basis).
 
 How can we go about finding the QFT of a generic state $\ket{X}=\sum_{j=0}^{2^n-1} f(j)\ket{j}$? 
 
@@ -425,7 +425,7 @@ Notably, excluding the number of operations required for the preparation of the 
 
 \subsection*{Quantum Phase Estimation}
 
-Now we will tackle a problem with potentially paramount importance in electronic structure theory. Given an operator in the qubit space (later we will discuss how to represent an electronic operator in the qubit space), how can we find its eigenvalues and eigenstates(we have already seen how to represent a many-electron state with qubits).
+Now we will tackle a problem with potentially paramount importance in electronic structure theory. Given an operator in the qubit space, how can we find its eigenvalues and eigenstates\footnote{We have already seen how to represent a many-electron state in the qubit-space. Later we will discuss how to represent an electronic operator in the qubit space}.
 %
 To this end, let us start with a simpler problem.
 %
