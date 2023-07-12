@@ -236,7 +236,7 @@ Note that the final state after operation of $\hat{XH}$ can be written as a simp
 
 Let us see an example where this is no longer true. 
 
-A controlled gate acts on a 2-qubit state in such a way that, if the left (control) qubit is in state $\ket{0}$, then it performs an identity operation ($\hat{I}$) on the right (target) qubit. However, if the control qubit is in state $\ket{1}$, then the controlled gate will perform a predefined operation on the target qubit. A controlled NOT (CNOT) gate, for which the predefined operation is a Pauli $\hat{X}$ operation, is a well-known example. Thus,
+A controlled gate acts on a 2-qubit state in such a way that, if the control qubit is in state $\ket{0}$, then it performs an identity operation ($\hat{I}$) on the target qubit. However, if the control qubit is in state $\ket{1}$, then the controlled gate will perform a predefined operation on the target qubit. A controlled NOT (CNOT) gate, for which the predefined operation is a Pauli $\hat{X}$ operation, is a well-known example. Denoting the left and the right qubit respectively as the control and the target qubit, we have
 
 \begin{align*}
     \hat{\mathrm{CNOT}}\ket{00} &{}= \ket{0} \otimes \left(\hat{I}\ket{0}\right)= \ket{00}\\
