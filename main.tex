@@ -277,10 +277,11 @@ where $\tilde{f}(k)$ is given by
 \end{align}
 Discretizing the problem, the discreet Fourier transform of a sequence of $N$ complex numbers $\{f(0),f(1),\hdots,f(N-1)\}$ (if we assume that the sequence repeats itself after an interval of $N$, we can compare the elements of this sequence with the values of $f(x)$ from Eq.~\ref{Fourier1} at a discrete set of points) can be defined as
 \begin{align}\label{Fourier_tilde_expansion}
-    \tilde{f}(k) = \frac{1}{\sqrt{N}} \sum_{j=0}^{N-1} f(j) e^{2\pi i \frac{jk}{N}}
+    \tilde{f}(k) = \frac{1}{\sqrt{N}} \sum_{j=0}^{N-1} f(j) e^{2\pi i \frac{jk}{N}}.
 \end{align}
+To avoid any possible confusion, it is important to mention that the sign of the exponent is a matter of convention. In fact, typically, for discrete Fourier transform, a negative exponent is used. However, in keeping with the standard convention of quantum Fourier transform (QFT), we are keeping it positive.
 
-We would want the Quantum Fourier Transform (QFT) operator $\hat{U}_{\rm{QFT}}$ to transform a vector with expansion-coefficients $\{f(0),f(1),\hdots,f(N-1)\}$ with respect to the computational basis-set into a vector with coefficients $\{\tilde{f}(0),\tilde{f}(1),\hdots,\tilde{f}(N-1)\}$. In mathematical terms:
+We would want the QFT operator $\hat{U}_{\rm{QFT}}$ to transform a vector with expansion-coefficients $\{f(0),f(1),\hdots,f(N-1)\}$ into a vector with coefficients $\{\tilde{f}(0),\tilde{f}(1),\hdots,\tilde{f}(N-1)\}$. In mathematical terms:
 
 \begin{align}\label{QFT_1}
     \hat{U}_{\rm{QFT}} \left(\sum_{k=0}^{N-1} f(k)\ket{k}\right) = \sum_{k=0}^{N-1}\tilde{f}(k)\ket{k},
@@ -322,7 +323,7 @@ Plugging this expression back into Eq.~\ref{QFT_2}, the following equation is ob
     &{} = \frac{1}{\sqrt{N}} \left(\sum_{k_{n-1}=0}^1 \left( e^{2\pi ij \frac{k_{n-1}}{2}} \ket{k_{n-1}}\right) \right) \otimes \hdots \otimes \left(\sum_{k_1=0}^1 e^{2\pi ij \frac{k_1}{2^{n-1}}} \ket{k_1}\right) \otimes \left(\sum_{k_0=0}^1 e^{2\pi ij \frac{k_0}{2^n}} \ket{k_0}\right)\\
     &{} = \frac{1}{\sqrt{N}} \left(\ket{0} + e^{\frac{2\pi ij}{2}}\ket{1}\right) \otimes \hdots \otimes \left( \ket{0} + e^{\frac{2\pi i j}{2^{n-1}}}\ket{1} \right)\otimes \left(\ket{0}+e^{\frac{2\pi i j}{2^n}}\ket{1}\right)\numberthis
 \end{align*}
-where, in the third line, we have expressed the $k$-th computational basis vectors as a tensor product of single-qubit basis vectors $$\ket{k}=\ket{k_{n-1}}\otimes\hdots\otimes\ket{k_0}.$$ This lets us express the sum over $k$ (i.e., over all computational basis functions of the $2^n$ dimensional space) in the second line as individual sums over each constituent qubit (as shown in line 3):
+where, in the third line, we have expressed the $k$-th computational basis vectors as a tensor product of single-qubit basis vectors $$\ket{k}=\ket{k_{n-1}}\otimes\hdots\otimes\ket{k_0}.$$ This lets us convert the sum over $k$, i.e., over all computational basis functions of the $2^n$ dimensional space (as shown in the second line) into individual sums over each constituent qubit (as shown in the third line):
 \begin{align*}
     \sum_{k=0}^{N-1} \rightarrow \sum_{k_{n-1}=0}^1 \hdots \sum_{k_0=0}^1
 \end{align*}
