@@ -214,7 +214,7 @@ The orthonormality of $\{\ket{0},\ket{1}\}$ implies that
     \braket{0|\hat{H}|0}=\frac{1}{\sqrt{2}}, \hspace{1cm} \braket{0|\hat{H}|1}=\frac{1}{\sqrt{2}}, \hspace{1cm} \braket{1|\hat{H}|0}=\frac{1}{\sqrt{2}}, \hspace{1cm}
     \braket{1|\hat{H}|1}=-\frac{1}{\sqrt{2}}.
 \end{align*}
-Therefore, with respect to the aforementioned basis set, $\hat{H}$ can be written in matrix form as
+Therefore, with respect to the computational basis set, $\hat{H}$ can be written in matrix form as
 \begin{align}
     \frac{1}{\sqrt{2}}\begin{pmatrix}
         1 & 1\\ 1 & -1
@@ -227,12 +227,12 @@ Another 1-qubit gate is the Pauli gate $\hat{X}$ whose operations are given by
 indicating a matrix representation of $\begin{pmatrix}
     0 & 1\\ 1 & 0
 \end{pmatrix}$.
-A tensor-product of $N$ number of single-qubit operators (each operator associated with a 2-dimensional vector space) is an operator acting on $N$ qubits (associated with a $2^N$ dimensional vector space). With this in mind, let us construct a simple 2-qubit operator from $\hat{X}$ and $\hat{H}$ such that its operation on the state $\ket{ab}$ (see Eq.~\ref{Eq2}) follows
+A tensor-product of $n$ number of single-qubit operators (each operator associated with a 2-dimensional vector space) is an operator acting on $n$ qubits (associated with a $2^n$ dimensional vector space). With this in mind, let us construct a simple 2-qubit operator from $\hat{X}$ and $\hat{H}$ such that its operation on the state $\ket{ab}$ (see Eq.~\ref{Eq2}) follows
 \begin{align}
 \hat{XH}\left(\ket{ab}\right)&{}=\left(\hat{X}\ket{a}\right)\otimes\left(\hat{H}\ket{b}\right)\\
 &{}=\left(a_0\ket{1}+a_1\ket{0}\right) \otimes \frac{1}{\sqrt{2}} \left(b_0\ket{+}+b_1\ket{-}\right)
 \end{align}
-Note that the final state after operation of $\hat{XH}$ can be written as a simple tensor-product of two single-qubit states. Thus, after the operation, the second qubit will be in the state $\left(a_0\ket{1}+a_1\ket{0}\right)$ and the first qubit will be in the state $\frac{1}{\sqrt{2}} \left(b_0\ket{+}+b_1\ket{-}\right)$ with a normalization factor of $\frac{1}{\sqrt{2}}$. Thus, the final state is \textbf{not entangled}. This is not surprising, given that the 2-qubit operator $\hat{XH}$ itself is a simple tensor-product of 2 single-qubit operators.
+Note that the final state after operation of $\hat{XH}$ can be written as a simple tensor-product of two single-qubit states. Thus, after the operation, the second qubit will be in the state $\left(a_0\ket{1}+a_1\ket{0}\right)$ and the first qubit will be in the state $\left(b_0\ket{+}+b_1\ket{-}\right)$ with a normalization factor of $\frac{1}{\sqrt{2}}$. Thus, the final state is \textbf{not entangled}. This is not surprising, given that the 2-qubit operator $\hat{XH}$ itself is a simple tensor-product of 2 single-qubit operators.
 
 Let us see an example where this is no longer true. 
 
