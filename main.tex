@@ -52,7 +52,7 @@
 \DeclarePairedDelimiter\cket{\lvert}{\rangle}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
-\title{Quantum Computing Primer for Electronic-Structure}
+\title{A Primer on Quantum Computing for Electronic-Structure Theory}
 \author{Subhayan Roychoudhury\\ The Molecular Foundry\\ Lawrence Berkeley National Laboratory}
 \date{}
 %\affil{LBNL}
@@ -261,10 +261,9 @@ Acting on the 2-qubit state $\ket{+0}$, this will produce
 \end{align*}
 This can not be written as a tensor product of 2 single-qubit states. If we measure the state of the first qubit~\footnote{in this context, when I say ``\textit{measure the state}'' of a qubit, what I mean is ``\textit{measure the observable corresponding to the operator $\hat{Z}$, for which the eigenvectors are $\ket{0}$ and $\ket{1}$}''} and get, for example, the eigenvalue corresponding to $\ket{1}$, then we know immediately that the entire 2-qubit system must have collapsed to the state $\ket{11}$. Therefore, the second qubit is guaranteed to have collaposed to $\ket{1}$. Thus, in the state $\hat{\mathrm{CNOT}}\ket{+0}$, the two qubits are entangled! Under these circumstances, there is no such thing as ``state of the first qubit'' or ``state of the second qubit''.
 
-The controlled rotation CROT gate is another example of a contolled gate. This gate performs a rotation operation $\hat{U}_\theta$ by a predefined angle $\theta$ such that
-\begin{align}\label{kickback1}   \hat{U}_\theta\ket{\psi}=e^{i\theta}\ket{\psi}
+The controlled rotation CROT gate is another example of a contolled gate. If the control qubit is $\ket{1}$, this gate performs, on the target qubit, a rotation operation $\hat{U}_\theta$ by a predefined angle $\theta$ such that
+\begin{align}\label{kickback1}   \hat{U}_\theta\ket{\psi}=e^{i\theta}\ket{\psi}.
 \end{align}
-on the target qubit, if the control qubit is $\ket{1}$.
 
 Let us operate this on the 2-qubit state $$\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)\otimes\ket{1} = \frac{1}{\sqrt{2}}\left(\ket{01}+\ket{11}\right)$$. This should produce
 \begin{align*}\label{kickback2}
@@ -293,7 +292,7 @@ We would want the QFT operator $\hat{U}_{\rm{QFT}}$ to transform a vector with e
     \hat{U}_{\rm{QFT}} \left(\sum_{k=0}^{N-1} f(k)\ket{k}\right) = \sum_{k=0}^{N-1}\tilde{f}(k)\ket{k},
 \end{align}
 
-where $\ket{k}$ is the $k$-th vectors of the computational basis set. Notably, the basis set contains $N$ number of basis vectors. Therefore, this $N$-dimensional vector space is associated with $n=log_2(N)$ qubits. Taking inner product of both sides of Eq.~\ref{QFT_1} with $\bra{j}$ and summing over $j$,
+where $\ket{k}$ is the $k$-th vectors of the computational basis set. Notably, the basis set contains $N$ number of basis vectors. Therefore, this $N$-dimensional vector space is associated with $n=log_2(N)$ qubits. Taking inner product of both sides of Eq.~\ref{QFT_1} with $\bra{j}$ and summing over $j$ we obtain
 
 \begin{align*}
     \sum_{j=0}^{N-1}\sum_{k=0}^{N-1} f(k)\braket{j|\hat{U}_\mathrm{QFT}|k} &{}=  \sum_{j=0}^{N-1}\sum_{k=0}^{N-1} \tilde{f}(k)\delta_{j,k}\\
@@ -310,9 +309,9 @@ i.e.,
 \end{align*}
 Now, we will try to express
 \begin{align}\label{QFT_2}
-    \hat{U}_\mathrm{QFT}\ket{j} &{}=\frac{1}{\sqrt{N}} \sum_{k=0}^{N-1}e^{2\pi ij\frac{k}{N}}\ket{k}.
+    \hat{U}_\mathrm{QFT}\ket{j} &{}=\frac{1}{\sqrt{N}} \sum_{k=0}^{N-1}e^{2\pi ij\frac{k}{N}}\ket{k}
 \end{align}
-as a tensor-product of $n$ number of single-qubit states. At this point, it is necessary to express the integer $k$ in terms of its binary representation. If $k$ can be written in binary form as $$k_{n-1}k_{n-2}\hdots k_0 \hspace{2cm} \textrm{ where } k_i \in \{0,1\} \forall i=0,\hdots,n-1,$$
+as a tensor-product of $n$ number of single-qubit states (if you want, you can skip to the result shown in Eq.~\ref{QFT_main}). At this point, it is necessary to express the integer $k$ in terms of its binary representation. If $k$ can be written in binary form as $$k_{n-1}k_{n-2}\hdots k_0 \hspace{2cm} \textrm{ where } k_i \in \{0,1\} \forall i=0,\hdots,n-1,$$
 where $k_0$ is the least significant bit, then
 \begin{align*}
     k=k_{n-1}2^{n-1}+k_{n-2}2^{n-2}+\hdots+k_02^0.
@@ -367,9 +366,9 @@ Now let us take a close look at Fig.~\ref{QFT_circuit}.
     \begin{align*}
 \hat{\mathrm{CROT}}_2\left(\ket{0}\otimes\ket{j_{n-2}}+e^{\pi i j_{n-1}}\ket{1}\otimes\ket{j_{n-2}}\right)\otimes \frac{1}{\sqrt{2}}\ket{j_{n-3}\hdots j_0}
     \end{align*}
-    Note from the circuit diagram that, of the two qubits involved in the $\hat{R}_2$ operation, the state $\ket{j_{n-2}}$ acts as the control qubit. Note that $$\hat{R}_2\ket{0}=e^{\frac{2\pi i.0}{2^2}}\ket{0}=\ket{0},$$
+    Note from the circuit diagram that, of the two qubits involved in the $\hat{R}_2$ operation, the state $\ket{j_{n-2}}$ acts as the control qubit. Now, $$\hat{R}_2\ket{0}=e^{\frac{2\pi i.0}{2^2}}\ket{0}=\ket{0},$$
     and therefore, 
-    $$\hat{\mathrm{CROT}}_2\left(\ket{0}\otimes\ket{j_{n-2}}\right) = \ket{0}\otimes\ket{j_{n-2}}.$$
+    $$\hat{\mathrm{CROT}}_2\left(\ket{0}\otimes\ket{j_{n-2}}\right) = \left(\hat{R}_2\ket{0}\right)\otimes\ket{j_{n-2}}=\ket{0}\otimes\ket{j_{n-2}}.$$
     What about $\hat{\mathrm{CROT}}_2 \ket{1}\otimes\ket{j_{n-2}}$?
     If $\ket{j_{n-2}}=\ket{0}$, then obviously the state remains intact:
     \begin{align*}
@@ -483,8 +482,7 @@ Now let us look at the circuit in Fig.~\ref{QPE_circuit}. We prepare the control
         &{}= \left[\frac{1}{\sqrt{2^n}} \sum_{j=0}^{2^n-1}e^{2\pi i j \phi}\ket{j}\right]\ket{\Psi}\numberthis
     \end{align*}
     If, for some integer $k<2^n$, we have $\phi=\frac{k}{2^n}$, then from Eq.~\ref{QFT_2}, the term inside the square brackets can be seen to be $\hat{U}_{\mathrm{QFT}}\ket{k}$.
-    \item Thus, if $\phi=\frac{k}{2^n}$, then an inverse QFT of the $n$ control qubits will produce, at point 5, the computational basis vector $\ket{k}=\ket{2^n\phi}$ will full certainty. This will conclude the process of finding the eigenvalue of $\ket{\Psi}$. The target register stays at state $\ket{\Psi}$.
-
+    \item Thus, if $\phi=\frac{k}{2^n}$, then an inverse QFT of the $n$ control qubits will produce, at point 5, the computational basis vector $\ket{k}=\ket{2^n\phi}$ will full certainty. This will conclude the process of finding the eigenvalue of $\ket{\Psi}$. Since the target register stays at state $\ket{\Psi}$, the final state is
     \begin{align}
         \ket{\Phi_5}=\ket{2^n\phi}\otimes\ket{\Psi}
     \end{align}
