@@ -74,7 +74,7 @@ where we have defined
     \phi(\mathbf{r})= \braket{\mathbf{r}|\phi}.
 \end{align}
 
-For the sake of computational feasibility, we need to work with a discrete set of points within a real space grid. Then, we need to replace the integral with a sum as
+For the sake of computational feasibility, we have to work with a discrete set of points within a real space grid. In other words, we need to replace the integral with a sum like
 
 \begin{align}\label{OneP_Expansion}
     \ket{\phi} = \sum_{i=1}^m \phi_i \ket{\mathbf{r}_i},
@@ -84,7 +84,7 @@ where $m$ denotes the total number of grid points, $\ket{\mathbf{r}_i}$ is the p
     \phi_i=\braket{\mathbf{r}_i|\phi}.
 \end{align}
 
-Eq.~\ref{OneP_Expansion} shows that, in this representation, our basis set $\{\ket{\mathbf{r}_1}, \ket{\mathbf{r}_2},\hdots, \ket{\mathbf{r}_m}\}$ has $m$ number of basis vectors. What happens if, instead of a single particle, we need to describe a two-particle state within the same grid? Now our basis set becomes something like
+Eq.~\ref{OneP_Expansion} shows that, in this representation, our basis set $\{\ket{\mathbf{r}_1}, \ket{\mathbf{r}_2},\hdots, \ket{\mathbf{r}_m}\}$ has $m$ number of basis vectors. But what happens if, instead of a single particle, we need to describe a two-particle state within the same grid? Now our basis set becomes something like
 \begin{align*}
     \{\ket{\mathbf{r}_1\mathbf{r}_1}, \ket{\mathbf{r}_1\mathbf{r}_2} , \hdots , \ket{\mathbf{r}_1\mathbf{r}_m}, \ket{\mathbf{r}_2\mathbf{r}_1} , \ket{\mathbf{r}_2\mathbf{r}_2}, \hdots , \ket{\mathbf{r}_2\mathbf{r}_m}, \hdots , \ket{\mathbf{r}_m\mathbf{r}_1}, \ket{\mathbf{r}_m\mathbf{r}_2}, \hdots , \ket{\mathbf{r}_m\mathbf{r}_m}\},
 \end{align*}
@@ -102,11 +102,17 @@ For the purpose of describing a many-electron system, a couple of additional poi
         \{\ket{\mathbf{r}_1}\otimes\ket{\uparrow}, \ket{\mathbf{r}_1}\otimes\ket{\downarrow}, \ket{\mathbf{r}_2}\otimes\ket{\uparrow}, \ket{\mathbf{r}_2}\otimes\ket{\downarrow},\hdots, \ket{\mathbf{r}_m}\otimes\ket{\uparrow}, \ket{\mathbf{r}_m}\otimes\ket{\downarrow}\}.
     \end{align*}
     This has $M = 2m$ number of basis vectors.  We shall call them spin-orbitals in the position basis. By extension, for $N$-particles, we will need $(M)^N$ basis vectors. For $\alpha \in \{\uparrow,\downarrow\}$, we will use the notation $\ket{\mathbf{r}_i^\alpha}$ to denote $\ket{\mathbf{r}_i}\otimes\ket{\alpha}$.
-    \item Electrons are indistinguishable particles with wavefunctions that are antisymmetric with respect to an exchange of any two electrons. This implies, for example, that
-    \begin{align}
-        \ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta} = -\ket{\mathbf{r}_j^\beta\mathbf{r}_i^\alpha},
-    \end{align}
-    and therefore, we do not need to consider them separately when we construct our basis set. We can, in fact, combine them into the so-called Slater determinants.
+    \item Electrons are indistinguishable particles with wavefunctions that are antisymmetric with respect to an exchange of any two electrons. This implies, for example, that if a two-electron state $\ket{\Psi}$ could be expressed as
+    \begin{align*}
+        \ket{\Psi}=C_1\ket{\mathbf{r}_i^\alpha}\otimes\ket{\mathbf{r}_j^\beta} + C_2 \ket{\mathbf{r}_j^\beta} \otimes \ket{\mathbf{r}_i^\alpha},
+    \end{align*}
+    then it follows that
+    \begin{align*}
+        -\ket{\Psi}= C_1 \ket{\mathbf{r}_j^\beta} \otimes \ket{\mathbf{r}_i^\alpha} + C_2 \ket{\mathbf{r}_i^\alpha}\otimes\ket{\mathbf{r}_j^\beta},
+    \end{align*}
+    and consequently, that $C_1 = -C_2$.
+
+    Therefore, we do not need to consider these two basis vectors separately when we construct our basis set. We can, in fact, combine them into the so-called Slater determinants.
 
     This also implies that
 \begin{align}
