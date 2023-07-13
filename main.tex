@@ -265,12 +265,14 @@ The controlled rotation CROT gate is another example of a contolled gate. If the
 \begin{align}\label{kickback1}   \hat{U}_\theta\ket{\psi}=e^{i\theta}\ket{\psi}.
 \end{align}
 
-Let us operate this on the 2-qubit state $$\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)\otimes\ket{1} = \frac{1}{\sqrt{2}}\left(\ket{01}+\ket{11}\right)$$. This should produce
+Let us operate this on the 2-qubit state $$\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)\otimes\ket{1} = \frac{1}{\sqrt{2}}\left(\ket{01}+\ket{11}\right).$$ This should produce
 \begin{align*}\label{kickback2}
     \frac{1}{\sqrt{2}}\left(\ket{01}+\exp^{i\theta}\ket{11}\right) = \frac{1}{\sqrt{2}} \left(\ket{0}+\exp^{i\theta}\ket{1}\right)\otimes\ket{1}.\numberthis
 \end{align*}
 Interestingly, the operation has altered the state of the control qubit from $\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)$ to $\frac{1}{\sqrt{2}}\left(\ket{0}+\exp^{i\theta}\ket{1}\right)$, leaving the state of the target qubit intact at $\ket{1}$. In other words, a rotation was essentially applied to the control qubit, even though the rotation operator $\hat{U}_\theta$ acted only on the target qubit. The result of the phase-rotation of the target qubit is effectively kicked back onto the control qubit. This effect is called \textbf{phase kickback}.
 Now we will use this effect to construct a quantum circuit that can solve a crucial problem, namely that of finding the discrete Fourier transform.
+
+\subsection*{Quantum Fourier Transform}
 
 A periodic function $f(x)$ with a period of $l$ can be written as a linear combination of its Fourier components as
 \begin{align}\label{Fourier1}
