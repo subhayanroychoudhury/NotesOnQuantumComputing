@@ -117,9 +117,9 @@ For the purpose of describing a many-electron system, a couple of additional poi
 
 Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons. These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied spin-orbitals from a total number of $M$. Therefore, instead of $(M)^N$, now the number of basis-vectors in our set should be $_{M}C_N$ (the binomial coefficient \textit{$M$ choose $N$}). Let us find out what these basis vectors should look like.
 
-If there are $M$ number of spin-orbitals, then any such basis vector (Slater determinant) can be expressed as
+If there are $M$ number of spin-orbitals, then any such basis vector (analogous to a Slater determinant) can be expressed as
 \begin{align}\label{SD_OccupationRepresentation}
-    \mathrm{SD}=\ket{j_{M-1}j_{M-2}\hdots j_1 j_0},
+    \ket{\mathrm{B}}=\ket{j_{M-1}j_{M-2}\hdots j_1 j_0},
 \end{align}
 where, for any $i=0,\hdots,M-1$, the value of $j_i$ can be either 0 or 1. In this convention, $j_i=0$ and $j_i=1$ will indicate, respectively, that the $(i+1)$-th spin-orbital is empty and occupied. Since each spin-orbital can only have two possible occupancies (0 or 1), the number of possible Slater determinants can not exceed $2^M$. However, if the total number of electrons is known to be $N$, then we know that every Slater determinant must have exactly $N$ number of occupied orbitals. Then, as mentioned earlier, the possible number of Slater determinants boils down to $_MC_N$, which, for any $N$, can never exceed $2^M$.
 
@@ -137,7 +137,7 @@ On a conventional computer, the increment in memory is linear with the increment
 %Now, the state of a qubit, the unit of information of a quantum computer, resides in a 2-dimensional Hilbert space and thereby, requires two basis vectors for its description. Let us choose a set of orthonormal basis vectors in this Hilbert space and denote them by $\ket{0}$ and $\ket{1}$. Naturally, an arbitrary state of $n$ qubits is expressible as a linear-combination of $2^n$ basis vectors. Thus, the dimension of the relevant Hilbert space, and consequently the storage capacity increases exponentially with the number of qubits.
 
 
-How, then, can we represent a general many-electron state, written as a linear combination of $_MC_N$ Slater determinants like the one shown in Eq.~\ref{SD_OccupationRepresentation}, with the help of a quantum computer? %Note that every basis 
+Let us find out how we can represent a general many-electron state, written as a linear combination of $_MC_N$ basis vectors (the form of a generic basis vector was shown in Eq.~\ref{SD_OccupationRepresentation}), with the help of a quantum computer? %Note that every basis 
 
 
 %We can now easily represent the aforementioned Slater determinant with qubits. In a quantum-representation using qubits, we can adapt a convention whereby, the $i$-th qubit being in state $\ket{1}$ will indicate that the $(i+1)$-th spin-orbital is occupied while the state $\ket{0}$ for the qubit will indicate an unoccupied $(i+1)$-th spin-orbital. 
@@ -504,11 +504,12 @@ Note that if $\hat{O}$ is associated with any observable, then it is Hermitian a
     \begin{align*}
         \ket{\Phi_1}=\sum_p \alpha_p \left[\frac{1}{\sqrt{2^n}}\sum_{j=0}^{2^n-1}\ket{j}\right]\otimes\ket{\Psi_p}
     \end{align*}
-    \item At point 5, the state would be
+    \item At point 4, the state would be
     \begin{align*}
-        \ket{\Phi_5} &{} =\sum_p \alpha_p \left[\frac{1}{\sqrt{2^n}} \sum_{j=0}^{2^n-1}e^{2\pi i j \phi_p}\ket{j}\right]\otimes\ket{\Psi_p}\\
+        \ket{\Phi_4} &{} =\sum_p \alpha_p \left[\frac{1}{\sqrt{2^n}} \sum_{j=0}^{2^n-1}e^{2\pi i j \phi_p}\ket{j}\right]\otimes\ket{\Psi_p}\\
         &{} = \alpha_1 \left[\left(\frac{1}{\sqrt{2^n}} \sum_{j=0}^{2^n-1}e^{2\pi i j \phi_1}\ket{j}\right)\otimes\ket{\Psi_1}\right] + \alpha_2 \left[\left(\frac{1}{\sqrt{2^n}} \sum_{j=0}^{2^n-1}e^{2\pi i j \phi_2}\ket{j}\right)\otimes\ket{\Psi_2}\right] + \hdots
     \end{align*}
+    %What happens now if we do an inverse Fourier transform of the control register alone? 
     This expression indicates that, if, for some integer $k<2^n$, we have $\phi_p=\frac{k}{2^n}$, then an inverse Fourier transform of the control register will produce the computational basis vector $\ket{2^n\phi_p}$ with a probability of $|\alpha_p|^2$.
 \end{enumerate}
 \end{document}
