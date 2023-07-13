@@ -110,15 +110,11 @@ For the purpose of describing a many-electron system, a couple of additional poi
     \begin{align*}
         -\ket{\Psi}= C_1 \ket{\mathbf{r}_j^\beta} \otimes \ket{\mathbf{r}_i^\alpha} + C_2 \ket{\mathbf{r}_i^\alpha}\otimes\ket{\mathbf{r}_j^\beta},
     \end{align*}
-    and consequently, that $C_1 = -C_2$.
+    and consequently, that $C_1 = -C_2$. You can verify that this relation is, in fact, quite general. Let $\ket{B_1}$ be a tensor-product of $N$ spin-orbitals and let $\ket{B_2}$ be obtained from $\ket{B_1}$ by swapping the order of two spin-orbitals. Then, for any generic $N$-electron state, the projection on $\ket{B_2}$ must be the negative of the projection on $\ket{B_1}$.
+    
+    Therefore, we do not need to consider $\ket{B_1}$ and $\ket{B_2}$ separately when we construct our basis set. We can, in fact, combine them into the so-called Slater determinants.
 
-    Therefore, we do not need to consider these two basis vectors separately when we construct our basis set. We can, in fact, combine them into the so-called Slater determinants.
-
-    This also implies that
-\begin{align}
-\ket{\mathbf{r}_i^\alpha\mathbf{r}_i^\alpha}=-\ket{\mathbf{r}_i^\alpha\mathbf{r}_i^\alpha}=\ket{0}.
-\end{align}
-
+    This also implies that, if, for a generic two-electron state $\ket{\Psi}$, the expansion coefficient corresponding to $\ket{\mathbf{r}_i^\alpha\mathbf{r}_i^\alpha}$ is $C$, the $C=-C=0$.
 \end{enumerate}
 
 Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons. These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied spin-orbitals from a total number of $M$. Therefore, instead of $(M)^N$, now the number of basis-vectors in our set should be $_{M}C_N$ (the binomial coefficient \textit{$M$ choose $N$}). Let us find out what these basis vectors should look like.
