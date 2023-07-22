@@ -62,7 +62,7 @@
 
 \maketitle
 
-\subsection*{Electronic Structure Theory and the Problem of Scaling}
+\section*{Electronic Structure Theory and the Problem of Scaling}
 
 Any general single-particle state $\ket{\phi}$ can be expressed with respect to position vectors (eigenvectors of the position operator) $\ket{\mathbf{r}}$ as
 \begin{align*}
@@ -110,11 +110,11 @@ For the purpose of describing a many-electron system, a couple of additional poi
     \begin{align*}
         -\ket{\Psi}= C_1 \ket{\mathbf{r}_j^\beta} \otimes \ket{\mathbf{r}_i^\alpha} + C_2 \ket{\mathbf{r}_i^\alpha}\otimes\ket{\mathbf{r}_j^\beta},
     \end{align*}
-    and consequently, that $C_1 = -C_2$. You can verify that this relation is, in fact, quite general. Let $\ket{B_1}$ be a tensor-product of $N$ spin-orbitals and let $\ket{B_2}$ be obtained from $\ket{B_1}$ by swapping the order of two spin-orbitals. Then, for any generic $N$-electron state, the projection on $\ket{B_2}$ must be the negative of the projection on $\ket{B_1}$.
+    and consequently, that $C_1 = -C_2$. You can verify that this relation is, in fact, quite general. Let $\ket{B_1}$ be a tensor-product of $N$ spin-orbitals and let $\ket{B_2}$ be obtained from $\ket{B_1}$ by swapping the order of two spin-orbitals. Then, for any generic $N$-electron state $\ket{\Psi}$, the projection on $\ket{B_2}$ must be the negative of the projection on $\ket{B_1}$ (i.e., $\braket{B_2|\Psi} = -\braket{B_1|\Psi}$).
     
     Therefore, we do not need to consider $\ket{B_1}$ and $\ket{B_2}$ separately when we construct our basis set. We can, in fact, linearly combine all tensor products of the same set of spin-orbitals into a single basis vector (the so-called Slater determinant).
 
-    This also implies that, if, for a generic two-electron state $\ket{\Psi}$, the expansion coefficient corresponding to $\ket{\mathbf{r}_i^\alpha\mathbf{r}_i^\alpha}$ is $C$, the $C=-C=0$. Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons.
+    This also implies that, if, for a generic two-electron state $\ket{\Psi}$, the expansion coefficient corresponding to $\ket{\mathbf{r}_i^\alpha\mathbf{r}_i^\alpha}$ is $C$, then $C=-C=0$. Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons.
 \end{enumerate}
 
 These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied spin-orbitals from a total number of $M$. Therefore, instead of $(M)^N$, now the number of basis-vectors in our set should be $_{M}C_N$ (the binomial coefficient \textit{$M$ choose $N$}). Let us find out what these basis vectors should look like.
@@ -139,7 +139,7 @@ On a conventional computer, the increment in memory is linear with the increment
 %Now, the state of a qubit, the unit of information of a quantum computer, resides in a 2-dimensional Hilbert space and thereby, requires two basis vectors for its description. Let us choose a set of orthonormal basis vectors in this Hilbert space and denote them by $\ket{0}$ and $\ket{1}$. Naturally, an arbitrary state of $n$ qubits is expressible as a linear-combination of $2^n$ basis vectors. Thus, the dimension of the relevant Hilbert space, and consequently the storage capacity increases exponentially with the number of qubits.
 
 
-Let us find out how we can represent a general many-electron state, written as a linear combination of $_MC_N$ basis vectors (the form of a generic basis vector was shown in Eq.~\ref{SD_OccupationRepresentation}), with the help of a quantum computer. %Note that every basis 
+To find out how, let us start by representing a general many-electron state, written as a linear combination of $_MC_N$ basis vectors~\footnote{the form of a generic basis vector was shown in Eq.~\ref{SD_OccupationRepresentation}}, with the help of a quantum computer. %Note that every basis 
 
 
 %We can now easily represent the aforementioned Slater determinant with qubits. In a quantum-representation using qubits, we can adapt a convention whereby, the $i$-th qubit being in state $\ket{1}$ will indicate that the $(i+1)$-th spin-orbital is occupied while the state $\ket{0}$ for the qubit will indicate an unoccupied $(i+1)$-th spin-orbital. 
@@ -150,7 +150,7 @@ Let us find out how we can represent a general many-electron state, written as a
     
     %A two-electron state $\ket{\Phi} = C_1 \ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta} + C_2 \ket{\mathbf{r}_j^\beta\mathbf{r}_i^\alpha} + \hdots$ can be written simply as $\ket{\Phi} = (C_1-C_2) \ket{\mathbf{r}_i^\alpha\mathbf{r}_j^\beta}+\hdots$
 
-\subsection*{The Qubit}
+\section*{The Qubit}
 
 For a quantum computer, the unit of information is a qubit. The state of a single qubit resides in a 2-dimensional vector space. Naturally, any basis-set of this space contains two basis vectors. Let us choose a set where the two orthogonal basis vectors are denoted by $\ket{0}$ and $\ket{1}$. Thus, any general vector 
 \begin{align}\label{Eq1}
@@ -206,7 +206,7 @@ where, for any $i=0,\hdots,M-1$, the value of $q_i$ can be either 0 or 1. It is 
 
 However, being able to merely represent a many-electrons states with the help of qubits is not enough. Typically, we would be interested in \textit{solving} an electronic-structure problem: such as finding a specific eigenstate of a given operator, finding the evolution of a given state with time, etc. To this end, we will typically need the ability to apply operators (for example, the Hamiltonian, or the time-evolution operator) on the many-electron states. In the context of quantum computation, this, naturally, means that we need operators for the qubit space. 
 
-\subsection*{Quantum Gates}
+\section*{Quantum Gates}
 
 In the context of quantum-circuits, an $n$-qubit operator is essentially an $n$-qubit gate that changes an $n$-qubit quantum state from some initial state $\ket{I}$ to some final state $\ket{F}$.
 
@@ -272,7 +272,7 @@ Let us operate this on the 2-qubit state $$\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{
 Interestingly, the operation has altered the state of the control qubit from $\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)$ to $\frac{1}{\sqrt{2}}\left(\ket{0}+\exp^{i\theta}\ket{1}\right)$, leaving the state of the target qubit intact at $\ket{1}$. In other words, a rotation was essentially applied to the control qubit, even though the rotation operator $\hat{U}_\theta$ acted only on the target qubit. The result of the phase-rotation of the target qubit is effectively kicked back onto the control qubit. This effect is called \textbf{phase kickback}.
 Now we will use this effect to construct a quantum circuit that can solve a crucial problem, namely that of finding the discrete Fourier transform.
 
-\subsection*{Quantum Fourier Transform}
+\section*{Quantum Fourier Transform}
 
 A periodic function $f(x)$ with a period of $l$ can be written as a linear combination of its Fourier components as
 \begin{align}\label{Fourier1}
@@ -428,9 +428,9 @@ If we want the discrete Fourier transform of the sequence $\{f(0),f(1),\hdots,f(
 %
 If the number of collapses to the state $\ket{k}$, recorded in the reverse order, is $\tau_k$, then we can conclude that $|\tilde{f}(k)|=\left(\frac{\tau_k}{\tau}\right)^{0.5}$.
 
-Notably, excluding the number of operations required for the preparation of the initial state, the number of operations required in the circuit (Fig.~\ref{QFT_circuit}) is $n + (n-1) + \hdots + 1=\frac{n(n+1)}{2}$, which scales polynomially with respect to the number of qubits.
+Notably, excluding the number of operations required for the preparation of the initial state, the number of operations required in the circuit (Fig.~\ref{QFT_circuit}) is $n + (n-1) + \hdots + 1=\frac{n(n+1)}{2}$, which scales polynomially with respect to the number of qubits. In comparison, the fast Fourier transform algorithm of a conventional computer (the most efficient known conventional algorithm for computing Fourier transform) requires an order of $2^nn$ operations.
 
-\subsection*{Quantum Phase Estimation}
+\section*{Quantum Phase Estimation}
 
 Now we will tackle a problem with potentially paramount importance in electronic structure theory. Given an operator in the qubit space, how can we find its eigenvalues and eigenstates\footnote{We have already seen how to represent a many-electron state in the qubit-space. Later we will discuss how to represent an electronic operator in the qubit space}.
 %
