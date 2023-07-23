@@ -428,7 +428,7 @@ If we want the discrete Fourier transform of the sequence $\{f(0),f(1),\hdots,f(
 %
 If the number of collapses to the state $\ket{k}$, recorded in the reverse order, is $\tau_k$, then we can conclude that $|\tilde{f}(k)|=\left(\frac{\tau_k}{\tau}\right)^{0.5}$.
 
-Notably, excluding the number of operations required for the preparation of the initial state, the number of operations required in the circuit (Fig.~\ref{QFT_circuit}) is $n + (n-1) + \hdots + 1=\frac{n(n+1)}{2}$, which scales polynomially with respect to the number of qubits. In comparison, the fast Fourier transform algorithm of a conventional computer (the most efficient known conventional algorithm for computing Fourier transform) requires an order of $2^nn$ operations.
+Notably, excluding the number of operations required for the preparation of the initial state, the number of operations required for computing the QFT of a sequence of $N$ complex numbers using the circuit (Fig.~\ref{QFT_circuit}) is $n + (n-1) + \hdots + 1=\frac{n(n+1)}{2}=\frac{\mathrm{log}_2N(\mathrm{log}_2N+1)}{2}$, which scales polynomially with respect to the number of qubits. In comparison, the fast Fourier transform algorithm of a conventional computer (the most efficient known conventional algorithm for computing Fourier transform) requires an order of $N\mathrm{log}N$ operations.
 
 \section*{Quantum Phase Estimation}
 
