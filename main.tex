@@ -1,4 +1,4 @@
-\documentclass[12pt,oneside]{book}
+\documentclass[12pt,oneside]{article}
 %\geometry{bindingoffset=0cm}
 %\documentclass[prl,aps, 12pt]{revtex4}
 %\documentclass[1pt]{revtex4}%{article} \usepackage{amssymb}
@@ -12,6 +12,21 @@
 
 \renewcommand{\baselinestretch}{1.0}
 
+%%%%
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\cfoot{My Name}
+%\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\renewcommand{\headrulewidth}{0pt} % no line in header area
+\fancyfoot{} % clear all footer fields
+\renewcommand{\footrulewidth}{1pt}
+\fancyfoot[LE,RO]{\thepage}           % page number in "outer" position of footer line
+\fancyfoot[RE,LO]{\textit{Quantum Computing Primer : Subhayan Roychoudhury}}
+%%%%
 
 \usepackage{mdframed}
 \usepackage[T1]{fontenc}
@@ -52,8 +67,8 @@
 \DeclarePairedDelimiter\cket{\lvert}{\rangle}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
-\title{Quantum Computing : A Gentle Primer for Electronic Structure Theory Enthusiasts}
-\author{Subhayan Roychoudhury\\ The Molecular Foundry\\ Lawrence Berkeley National Laboratory}
+\title{Quantum Computing : A Gentle Primer for Quantum Chemists}
+\author{Subhayan Roychoudhury}%\\ The Molecular Foundry\\ Lawrence Berkeley National Laboratory}
 \date{}
 %\affil{LBNL}
 
@@ -110,11 +125,11 @@ For the purpose of describing a many-electron system, a couple of additional poi
     \begin{align*}
         -\ket{\Psi}= C_1 \ket{\mathbf{r}_j^\beta} \otimes \ket{\mathbf{r}_i^\alpha} + C_2 \ket{\mathbf{r}_i^\alpha}\otimes\ket{\mathbf{r}_j^\beta},
     \end{align*}
-    and consequently, that $C_1 = -C_2$. You can verify that this relation is, in fact, quite general. Let $\ket{B_1}$ be a tensor-product of $N$ spin-orbitals and let $\ket{B_2}$ be obtained from $\ket{B_1}$ by swapping the order of two spin-orbitals. Then, for any generic $N$-electron state $\ket{\Psi}$, the projection on $\ket{B_2}$ must be the negative of the projection on $\ket{B_1}$ (i.e., $\braket{B_2|\Psi} = -\braket{B_1|\Psi}$).
+    and consequently, that $C_1 = -C_2$. You can verify that this relation is, in fact, quite general. Let $\ket{B_1}$ be a tensor-product of $N$ spin-orbitals and let $\ket{B_2}$ be obtained from $\ket{B_1}$ by swapping the order of two spin-orbitals. Then, for any generic $N$-electron state, the projection on $\ket{B_2}$ must be the negative of the projection on $\ket{B_1}$.
     
     Therefore, we do not need to consider $\ket{B_1}$ and $\ket{B_2}$ separately when we construct our basis set. We can, in fact, linearly combine all tensor products of the same set of spin-orbitals into a single basis vector (the so-called Slater determinant).
 
-    This also implies that, if, for a generic two-electron state $\ket{\Psi}$, the expansion coefficient corresponding to $\ket{\mathbf{r}_i^\alpha\mathbf{r}_i^\alpha}$ is $C$, then $C=-C=0$. Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons.
+    This also implies that, if, for a generic two-electron state $\ket{\Psi}$, the expansion coefficient corresponding to $\ket{\mathbf{r}_i^\alpha\mathbf{r}_i^\alpha}$ is $C$, the $C=-C=0$. Therefore, from our basis set, we can discard any vector in which the same spin-orbital is occupied by multiple electrons.
 \end{enumerate}
 
 These considerations will reduce the number of vectors required for our $N$-particle basis set. Any basis vector that we need to include in our new basis set can now be uniquely defined by specifying which spin-orbitals are occupied and which ones are empty (since no spin-orbital can have multiple occupancy and since, thanks to indistinguishability, we do not care which electron is in which orbital). Thus, each basis vector corresponds to choosing $N$ number of occupied spin-orbitals from a total number of $M$. Therefore, instead of $(M)^N$, now the number of basis-vectors in our set should be $_{M}C_N$ (the binomial coefficient \textit{$M$ choose $N$}). Let us find out what these basis vectors should look like.
@@ -139,7 +154,9 @@ On a conventional computer, the increment in memory is linear with the increment
 %Now, the state of a qubit, the unit of information of a quantum computer, resides in a 2-dimensional Hilbert space and thereby, requires two basis vectors for its description. Let us choose a set of orthonormal basis vectors in this Hilbert space and denote them by $\ket{0}$ and $\ket{1}$. Naturally, an arbitrary state of $n$ qubits is expressible as a linear-combination of $2^n$ basis vectors. Thus, the dimension of the relevant Hilbert space, and consequently the storage capacity increases exponentially with the number of qubits.
 
 
-To find out how, let us start by representing a general many-electron state, written as a linear combination of $_MC_N$ basis vectors~\footnote{the form of a generic basis vector was shown in Eq.~\ref{SD_OccupationRepresentation}}, with the help of a quantum computer. %Note that every basis 
+Let us find out how we can represent a general many-electron state, written as a linear combination of $_MC_N$ basis vectors (the form of a generic basis vector was shown in Eq.~\ref{SD_OccupationRepresentation}), with the help of a quantum computer. %Note that every basis 
+
+
 
 
 %We can now easily represent the aforementioned Slater determinant with qubits. In a quantum-representation using qubits, we can adapt a convention whereby, the $i$-th qubit being in state $\ket{1}$ will indicate that the $(i+1)$-th spin-orbital is occupied while the state $\ket{0}$ for the qubit will indicate an unoccupied $(i+1)$-th spin-orbital. 
@@ -193,9 +210,9 @@ This notion can be generalized to more than 2 qubits in a straightforward manner
 \begin{align*}
 \{\ket{0,0,\hdots,0,0} , \ket{0,0,\hdots,0,1} , \ket{0,0,\hdots,1,0}, \ket{0,0,\hdots,1,1},\hdots ,\ket{1,1,\hdots,1,1} \}.
 \end{align*}
-Each basis vector contains $n$ terms, each of which can be either 0 or 1. The basis vectors are ordered in such a way that, for each vector, the rightmost term changes between any two successive vectors. The next (to the left) term changes with every other vector. Continuing in this fashion, it is easy to see that the leftmost term remains unchanged at 0 for the first $2^{n-1}$ basis vectors and then stays fixed at 1 for the rest of the vectors. Such a basis set will be referred to as a \textit{computational basis set} for $n$ qubits.
+Each basis vector contains $n$ terms, each of which can be either 0 or 1. The basis vectors are ordered in such a way that, for each vector, the rightmost term changes between any two successive vectors. The next (to the left) term changes with every other vector. Continuing in this fashion, it is easy to see that the leftmost term remains unchanged at 0 for the first $2^{n-1}$ basis vectors and then stays fixed at 1 for the rest of the vectors. Such a basis set will be referred to as a computational basis set for $n$ qubits.
 
-\subsection*{Many-electron States : a Qubit-based Representation}
+\subsection{Many-electron States : a Qubit-based Representation}\label{Many-electron_States_Qubit-based_Representation}
 
 From the discussion presented above, we can see that any computational basis-vector of $M$ qubits can be written as
 
@@ -204,7 +221,7 @@ From the discussion presented above, we can see that any computational basis-vec
 \end{align}
 where, for any $i=0,\hdots,M-1$, the value of $q_i$ can be either 0 or 1. It is easy to notice the resemblance between Eq.~\ref{M_qubit_basis}, i.e., a basis-vector of the $M$-qubit Hilbert space and Eq.~\ref{SD_OccupationRepresentation}, a basis-vector for a many-electron system with $M$ spin-orbitals. Therefore, in order to represent an arbitrary many-electron state using qubits, we can adopt a convention whereby the $i$-th qubit being in state $\ket{1}$ will indicate that the $(i+1)$-th spin-orbital is occupied, while the state $\ket{0}$ for the same qubit will indicate an unoccupied $(i+1)$-th spin-orbital. Then, any general many-electron state of any number ($<M$) of electrons, expressible as a linear-combination of Slater determinants composed of $M$ spin-orbitals (see Eq.~\ref{SD_OccupationRepresentation}), can be represented by some general $M$-qubit state constructed as a linear-combination of the computational basis-vectors (Eq.~\ref{M_qubit_basis}). Thus, in contrast with a conventional computer which requires $_MC_N$ bytes to store an $N$-electron state (as discussed earlier, this number is $\sim 10^{20}$ for a benzene molecule even if we use a minimal basis set), a quantum computer can store the same state with $M$ qubits (i.e., 72 qubits for the benzene example).
 
-However, being able to merely represent a many-electron state with the help of qubits is not enough. Typically, we would be interested in \textit{solving} an electronic-structure problem: such as finding a specific eigenstate of a given operator, finding the evolution of a given state with time, etc. To this end, we will typically need the ability to apply operators (for example, the Hamiltonian, or the time-evolution operator) on the many-electron states. In the context of quantum computation, this, naturally, means that we need operators for the qubit space. 
+However, being able to merely represent a many-electrons states with the help of qubits is not enough. Typically, we would be interested in \textit{solving} an electronic-structure problem: such as finding a specific eigenstate of a given operator, finding the evolution of a given state with time, etc. To this end, we will typically need the ability to apply operators (for example, the Hamiltonian, or the time-evolution operator) on the many-electron states. In the context of quantum computation, this, naturally, means that we need operators for the qubit space. 
 
 \section*{Quantum Gates}
 
@@ -270,7 +287,49 @@ Let us operate this on the 2-qubit state $$\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{
     \frac{1}{\sqrt{2}}\left(\ket{01}+\exp^{i\theta}\ket{11}\right) = \frac{1}{\sqrt{2}} \left(\ket{0}+\exp^{i\theta}\ket{1}\right)\otimes\ket{1}.\numberthis
 \end{align*}
 Interestingly, the operation has altered the state of the control qubit from $\frac{1}{\sqrt{2}}\left(\ket{0}+\ket{1}\right)$ to $\frac{1}{\sqrt{2}}\left(\ket{0}+\exp^{i\theta}\ket{1}\right)$, leaving the state of the target qubit intact at $\ket{1}$. In other words, a rotation was essentially applied to the control qubit, even though the rotation operator $\hat{U}_\theta$ acted only on the target qubit. The result of the phase-rotation of the target qubit is effectively kicked back onto the control qubit. This effect is called \textbf{phase kickback}.
-Now we will use this effect to construct a quantum circuit that can solve a crucial problem, namely that of finding the discrete Fourier transform.
+In a minute, we will use this effect to construct a quantum circuit that can solve a crucial problem, namely that of finding the discrete Fourier transform.
+
+
+\subsection*{Operator-action with conventional and quantum algorithms}
+Say you have $B$ orthonormal basis kets $\ket{\Phi_1},\ket{\Phi_2},\hdots,\ket{\Phi_B}$ for the many-electron states. A general many-electron state $\ket{\Psi}$ is given, with respect to the basis kets, as
+\begin{align}
+    \ket{\Psi}=\sum_{i=1}^B c_i \ket{\Phi_i}
+\end{align}
+Now, suppose that for some operator $\hat{O}$, you want to find
+\begin{align}\label{O_Psi_Expansion1}
+    \hat{O}\ket{\Psi} = \sum_{i=1}^N c_i \left(\hat{O}\ket{\Phi_i}\right).
+\end{align}
+Let's see how we will do this on a conventional and on a quantum computer.
+
+On a conventional computer, for each $k=1,\hdots,B$, you want to find the expansion coefficient
+\begin{align}\label{Phik_O_Psi}
+    c'_k = \braket{\Phi_k|\hat{O}|\Psi} = \sum_{i=1}^B c_i \braket{\Phi_k|\hat{O}|\Phi_i}
+\end{align}
+of $\hat{O}\ket{\Psi}$ with respect to $\ket{\Phi_k}$.
+
+To this end, first, for each combination of $i=1,\hdots,B$ and $j = 1,\hdots,B$, you will have to find $\alpha_{i,j}$ such that
+\begin{align}
+    \hat{O}\ket{\Phi_i} = \sum_{j=1}^B \alpha_{i,j}\ket{\Phi_j}.
+\end{align}
+Plugging this in Eq.~\ref{Phik_O_Psi}, we then obtain 
+\begin{align*}\label{Phik_O_Psi_Evaluation}
+    c'_k &{}= \sum_{i,j}^B c_i \alpha_{i,j}\braket{\Phi_k|\Phi_j}\\
+    &{} = \sum_{i,j}^B c_i \alpha_{i,j} \delta_{k,j}\\
+    &{} = \sum_{i=1}^B c_i \alpha_{i,k}\numberthis
+\end{align*}
+Eq.~\ref{Phik_O_Psi_Evaluation} implies that, if we know all of the $\alpha_{i,j}$ coefficients (these coefficients essentially \textit{define} the operator $\hat{O}$ with respect to our basis set since $\alpha_{i,j} = \braket{\Phi_i|\hat{O}|\Phi_j}$) and all of the $c_i$ coefficients (these coefficients define the given state $\ket{\Psi}$ with respect to our basis set), then, to find $c'_k$, we need to perform $B$ number of multiplications ($c_i \times \alpha_{i,k}$) and $B-1$ number of additions : i.e., $B(B-1)$ number of operations. We need to find $\braket{\Phi_k|\hat{O}|\Psi}$ for all $k=1,\hdots,B$. Therefore, $B^2(B-1)$ operations have to be performed in total. As discussed earlier, $B$, which is the number of basis kets in the many-electron basis set, scales as $_MC_N$, where $M$ is the size of the single-electron basis set and $N$ is the number of electrons. Therefore, for a large many-electron system, $B$ is a large number and the entire the computation will become intractable.
+
+On a quantum computer, in accordance with the discussion from~\ref{Many-electron_States_Qubit-based_Representation}, one will construct an $M$-qubit input state that represents $\ket{\Psi}$. Then, using quantum-gates, one will construct a representation of the operator $\hat{O}$. This operator will then be applied on the input state and the output will be a qubit-based representation of $\hat{O}\ket{\Psi}$. Thus, the whole procedure will require a single application of the qubit-based operator on the qubit-based state.
+
+Unfortunately, it will not be possible to measure the output state $\hat{O}\ket{\Psi}$ since a quantum state is not measurable. Thus, we will not have access to the final state. But it would be possible to measure observables associated with it.
+
+%\subsection*{Rephrase}
+The operator $\hat{O}$ converted the given ket $\ket{\Psi}$, which was defined, with respect to our chosen basis set, by a sequence of $N$ complex numbers $\left(c_1,c_2,\hdots,c_N\right)$, into a new ket $\hat{O}\ket{\Psi}$, which, with respect to the same basis set, is given by a different sequence of complex numbers $(c'_1,c'_2,\hdots,c'_N)$. A quantum computer can give us efficient access to the sequence $\left(|c'_1|^2,|c'_2|^2,\hdots,|c'_N|^2\right)$.
+
+Thus, forgetting about any physics-related application, if you have a known square matrix operating on a known column matrix and, for some reason, you want to find the absolute values of the components of the product (column) matrix - a quantum computer can produce those numbers with a single operation (provided, of course, that you can construct the relevant input and the gates).
+
+
+%Now, for a while, let's forget about the physics and inspect what we've just done from a different perspective. To the operator $\hat{O}$, we can associate a function $f_O$ which takes as its argument a sequence of complex numbers $[c_1,c_2,\hdots,c_N]$ and produces, as the output, a different sequence of complex numbers $[c'_1,c'_2,\hdots,c'_N]$. Suppose, for some reason, you are interested in the real numbers $[|c'_1|^2,|c'_2|^2,\hdots,|c'_N|^2]$. Then, forgetting about the physics (i.e., about an operator converting a ket into another ket), we can think of the whole thing just as a matrix multiplication, i.e, a $(N \times N)$ matrix left-multiplying a $(N \times 1)$ matrix. Using a conventional computer, we would then find the matrix product using $N^2(N-1)$ operations. A quantum computer will be able to do this in a single operation.
 
 \section*{Quantum Fourier Transform}
 
@@ -424,11 +483,21 @@ Naturally,
 \end{align*}
 where, in the second line we have used Eq.~\ref{QFT_2} and in the fourth line we have used Eq.~\ref{Fourier_tilde_expansion}. Therefore, as expected from the linearity of the QFT operator, if we use a generic state $\ket{X}$ as the input for the circuit of Fig.~\ref{QFT_circuit}, the output, read in the reverse order, will be its QFT.
 
-If we want the discrete Fourier transform of the sequence $\{f(0),f(1),\hdots,f(N-1)\}$, then, first of all, we have to prepare the input state as $\sum_{j=0}^{N-1}f(j)\ket{j}$ (unfortunately, this is not always possible in an efficient manner). Then we will feed this into the circuit of Fig.~\ref{QFT_circuit} and measure the output. If we repeat the entire process for say, $\tau$ number of times, then at different iterations, the measurement will collapse the final state to different vectors of the computational basis.
+If we want the discrete Fourier transform of the sequence $\{f(0),f(1),\hdots,f(N-1)\}$, then, first of all, we have to prepare the input state as $\sum_{j=0}^{N-1}f(j)\ket{j}$ (unfortunately, this is not always possible in an efficient manner). Then we will feed this into the circuit of Fig.~\ref{QFT_circuit}. The output of this circuit at point 7 will be the QFT of the input state, i.e., $\frac{1}{\sqrt{N}}\sum_{j=0}^{N-1}\tilde{f}(j)\ket{j}$. We can now measure this output.
 %
-If the number of collapses to the state $\ket{k}$, recorded in the reverse order, is $\tau_k$, then we can conclude that $|\tilde{f}(k)|=\left(\frac{\tau_k}{\tau}\right)^{0.5}$.
+If we repeat the entire process for say, $\tau$ number of times, then at different iterations, the measurement will collapse the final state to different vectors of the computational basis.
+%
+If the number of collapses to the state $\ket{k}$, recorded in the reverse order, is $\tau_k$, then we can conclude that $|\tilde{f}(k)|=\left(\frac{\tau_k}{\tau}\right)^{0.5}$. 
 
-Notably, excluding the number of operations required for the preparation of the initial state, the number of operations required for computing the QFT of a sequence of $N$ complex numbers using the circuit (Fig.~\ref{QFT_circuit}) is $n + (n-1) + \hdots + 1=\frac{n(n+1)}{2}=\frac{\mathrm{log}_2N(\mathrm{log}_2N+1)}{2}$, which scales polynomially with respect to the number of qubits. In comparison, the fast Fourier transform algorithm of a conventional computer (the most efficient known conventional algorithm for computing Fourier transform) requires an order of $N\mathrm{log}N$ operations.
+In Fig.~\ref{QFT_circuit}, note that the number of operations between the points 1 and 5 is $n$. That between the points 5 and 6 is $n-1$. Therefore, excluding the number of operations required for the preparation of the initial state (which should happen before point 1), the number of operations required in the circuit is $n + (n-1) + \hdots + 1=\frac{n(n+1)}{2}$, which scales polynomially with respect to the number of qubits.
+
+The QFT circuit has two massive drawbacks:
+\begin{itemize}
+    \item The preparation of the input state is not always possible with a polynomial number of operations.
+    \item As mentioned above, by repeating the entire operation (i.e., state-preparation, circuit-operation and measurement) multiple times, we can obtain $|\tilde{f}(k)|$ for all $k$, but can, unfortunately, never find $\tilde{f}(k)$, since this does not correspond to any measurable quantity. Since the $\tilde{f}(k)$'s are the (discretized) Fourier transforms of the input numbers (see Eq.~\ref{Fourier_tilde_expansion}), this essentially means that, in general, we can not use this circuit to find the Fourier transforms!
+\end{itemize}
+
+At this point, it may seem like we have spent time and effort into constructing a circuit that is ultimately useless. But it is not so. Even though the QFT circuit (Fig.~\ref{QFT_circuit}) can not be used directly for finding the Fourier coefficients, it can be used as a key component in other applications which do not require the Fourier coefficients themselves but require only their absolute values. Let me discuss such an application below.
 
 \section*{Quantum Phase Estimation}
 
@@ -514,6 +583,62 @@ Note that if $\hat{O}$ is associated with any observable, then it is Hermitian a
     %What happens now if we do an inverse Fourier transform of the control register alone? Assuming that, for some integer $k_p<2^n$, we have $\phi_p=\frac{k}{2^n}$, 
     This expression indicates that, if, for some integer $k<2^n$, we have $\phi_p=\frac{k}{2^n}$, then an inverse Fourier transform of the control register will produce the computational basis vector $\ket{2^n\phi_p}$ with a probability of $|\alpha_p|^2$.
 \end{enumerate}
+
+\section*{Combinatorial Optimization : The Travelling Salesman Problem}
+
+\subsection*{Formulating the problem}
+
+Optimization-problems are ubiquitous in most areas of science and society. Say, you have a discrete set of variables that can be combined in many different ways such that each combinations corresponds to a certain value of a predefined objective function. A combinatorial optimization aims to find the combination that optimizes the value of that objective function. 
+
+Let's take a concrete example. Given a connected graph of $N$ number of vertices with varying internodal distances, what is the shortest path for starting from a given vertex and looping back to it after visiting every other vertex exactly once? This is known as the \textbf{travelling salesman} problem.\footnote{Think of each vertex as a city. If a salesperson wants to sell their wares in every city, what would be the shortest route for them?}
+
+First things first. We have to give this problem a mathematical form. Every route can be expressed as a sequence of $N^2$ numbers $x_{i,j} \in [0,1]$, where  $i=0,\hdots,(N-1)$ and $j=0,\hdots,(N-1)$. If $x_{i,j}=1$, then the $j+1$-th stop of the salesperson is the city indexed by $(i+1)$ in the graph. For example, if a given loop involves visiting the cities in the order $1\rightarrow 3 \rightarrow  4 \rightarrow 2$, then $x_{0,0}=x_{1,3}=x_{2,1}=x_{3,2}=1$ while $x_{i,j}=0$ for all other pairs of $(i,j)$. The total distance traversed by the salesperson is
+\begin{align*}
+    C &{}= \omega_{0,2}+\omega_{2,3}+\omega_{3,1}+\omega_{1,0}\\
+    &{}=\omega_{0,2}x_{0,0}x_{2,1}+\omega_{2,3}x_{2,1}x_{3,2}+\omega_{3,1}x_{3,2}x_{1,3}+\omega_{1,0}x_{1,3}x_{0,0}\\
+    &{}=\sum_{i,j=0}^{3}\omega_{i,j}\sum_{p=0}^{3} x_{i,p}x_{j,p+1},
+\end{align*}
+where the last line follows from the fact that, the value of any $x_{i,j}$ not present in the second line is $0$. Generalizing this to a graph of $N$ nodes, we have
+\begin{align*}\label{TSP_CostFunction_unconstrained}
+    C= \sum_{i,j=0}^{N-1}\omega_{i,j}\sum_{p=0}^{N-1} x_{i,p}x_{j,p+1}. \numberthis
+\end{align*}
+
+Notably, any prospective route must follow two conditions:
+\begin{itemize}
+    \item Each city can be visited exactly once, i.e.
+    \begin{align*}\label{TSP_Constraint1}
+        \sum_{p=0}^{N-1} x_{i,p} = 1, \forall i,\numberthis
+    \end{align*}
+    \item Each time-step must involve visiting exactly one city, i.e.
+    \begin{align*}\label{TSP_Constraint2}
+        \sum_{i=0}^{N-1}x_{i,p}=1, \forall p.\numberthis
+    \end{align*}
+\end{itemize}
+
+Now, to find the optimal route, one must minimize the distance (cost function) given by Eq.~\ref{TSP_CostFunction_unconstrained} with the constraints given by Eq.~\ref{TSP_Constraint1} and~\ref{TSP_Constraint2}. Such a problem of constrained minimization is typically handled by introducing a set of Lagrange multipliers $\{\lambda^{(1)}_0,\hdots \lambda^{(1)}_{N-1}, \lambda^{(2)}_0\hdots,\lambda^{(2)}_{N-1}\}$ and minimizing a modified cost function
+
+\begin{align*}
+    &{} C(\mathbf{x},\boldsymbol{\lambda^{(1)}},\boldsymbol{\lambda^{(2)}}) = \sum_{i,j=0}^{N-1}\omega_{i,j}\sum_{p=0}^{N-1} x_{i,p}x_{j,p+1} + \sum_{i=0}^{N-1}\lambda^{(1)}_i \left(\sum_{p=0}^{N-1} x_{i,p} - 1\right) + \sum_{p=0}^{N-1}\lambda^{(2)}_p \left(\sum_{i=0}^{N-1} x_{i,p} - 1 \right)\numberthis
+\end{align*}
+
+with respect to $\mathbf{x}$ and $\{\lambda^{(1)}_0,\hdots ,\lambda^{(1)}_{N-1}, \lambda^{(2)}_0\hdots,\lambda^{(2)}_{N-1}\}$. However, note that, in order to find the minimal conditional route, we don't really need to go through all that trouble. Let us write the cost function as
+\begin{align}\label{TSP_CostFunction_constrained}
+    C(\mathbf{x})= \sum_{i,j=0}^{N-1}\omega_{i,j}\sum_{p=0}^{N-1} x_{i,p}x_{j,p+1} + \lambda \sum_{i=0}^{N-1}\left( 1 - \sum_{p=0}^{N-1}x_{i,p}\right)^2 + \lambda \sum_{p=0}^{N-1} \left( 1 - \sum_{i=0}^{N-1}x_{i,p} \right)^2.
+\end{align}
+Now, if any of the $N$ number of conditions given by Eq.~\ref{TSP_Constraint1} is violated, then the second term in the RHS of Eq.~\ref{TSP_CostFunction_constrained} is invariably positive. Similarly, if any of the $N$ number of conditions given by Eq.~\ref{TSP_Constraint2} is violated, then the third term in the RHS of Eq.~\ref{TSP_CostFunction_constrained} is invariably positive. The lowest possible value of the second and the third term is zero and this is achieved only when all of the conditions specified in Eq.~\ref{TSP_Constraint1} and Eq.~\ref{TSP_Constraint2} are satisfied. Therefore, by picking a \textit{large enough} constant $\lambda$, we can always ensure that, if any of the conditions given by Eq.~\ref{TSP_Constraint1} or~\ref{TSP_Constraint2} is violated, then the associated route $\mathbf{x}$ can never correspond to the minimum. On the other hand, if all of these conditions are satisfied, then $C(\mathbf{x})$ simply reduces to total distance given by the RHS of Eq.~\ref{TSP_CostFunction_unconstrained}.
+
+\subsection*{Mapping to a quantum problem}
+As mentioned earlier, every route $\mathbf{x}$ consists of a sequence of $N^2$ number of variables $X_{i,j}$ each of which can be either $0$ or $1$. Therefore, every route can be expressed as a computational basis vector of an $N^2$ qubit system (i.e., a computational basis vector in $2^{N^2}$ dimensions) such as %For example, the previously mentioned route $1\rightarrow 3 \rightarrow  4 \rightarrow 2$ can be expressed as
+\begin{align*}
+    \ket{x_{0,0} x_{0,1} \hdots x_{0,N-1} \hdots  x_{N-1,0} x_{N-1,1} \hdots x_{N-1,N-1}}.
+\end{align*}
+Each such state will correspond to a distance given by Eq.~\ref{TSP_CostFunction_constrained}. Therefore, if we can express $C(\mathbf{x})$ in the form of an operator, then by finding its ground state, we can know the optimal route. Note that, for the traveling salesman problem, a route expressed as a linear combination of multiple computational basis vectors won't make much sense. We want our solution to be a vector from the computational basis set, not a linear combination thereof. Thus, we would want the aforementioned operator to be a diagonal one with respect to the computational basis, so that each eigenvector would correspond to a computational basis.
+
+For a $2^n$ dimensional space, any operator of the form
+\begin{align*}\label{TSP_OperatorForm}
+   \hat{O} = \hat{O}_1 \otimes \hat{O}_2 \otimes \hdots \otimes \hat{O}_n,\numberthis
+\end{align*}
+where, for any integer $i<(n+1)$, the single-qubit operator $\hat{O}_i$ can either be the identity operator $\hat{I}_i$ or the Pauli Z-operator $\hat{Z}_i$, will have the $2^n$ dimensional computational basis vectors as its eigenstates. Therefore, the same is true for any linear combination of operators of the form Eq.~\ref{TSP_OperatorForm}.
 
 \textbf{To be continued $\hdots$}
 
